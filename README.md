@@ -1,6 +1,6 @@
 Store and retrieve objects from Elasticsearch
 =================
-[![Build Status](https://secure.travis-ci.org/freekmurze/searchindex)](http://travis-ci.org/freekmurze/searchindex)
+[![Build Status](https://travis-ci.org/freekmurze/searchindex.svg?branch=master)](https://travis-ci.org/freekmurze/searchindex)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e/mini.png)](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e)
 [![Latest Stable Version](https://poser.pugx.org/spatie/searchindex/version.png)](https://packagist.org/packages/spatie/searchindex)
 [![License](https://poser.pugx.org/spatie/searchindex/license.png)](https://packagist.org/packages/spatie/searchindex)

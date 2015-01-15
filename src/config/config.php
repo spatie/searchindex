@@ -13,6 +13,6 @@ return
 
                 'logPath' =>  storage_path() . '/logs/elasticsearch.log',
                 'logLevel' => 200,
-                'defaultIndexName' => 'bodart'
+                'defaultIndexName' => 'mainIndex'
             ]
     ];

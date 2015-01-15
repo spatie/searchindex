@@ -3,13 +3,14 @@ Store and retrieve objects from Elasticsearch
 [![Latest Stable Version](https://poser.pugx.org/spatie/searchindex/version.png)](https://packagist.org/packages/spatie/searchindex)
 [![License](https://poser.pugx.org/spatie/searchindex/license.png)](https://packagist.org/packages/spatie/searchindex)
 
-This is an opinionated Laravel 4 | 5 package to retrieve Google Analytics data.
+This is an opinionated Laravel 4 | 5 package to store and retrieve objects from Elasticsearch.
 
 
 
 ## Installation
+To be able to use this package you should have a server with Elasticsearch installed. If you want to install it on your local development machine you can use [these instructions](https://github.com/fideloper/Vaprobash/blob/master/scripts/elasticsearch.sh) from the excellent [Vaprobash repo](https://github.com/fideloper/Vaprobash).
 
-This package can be installed through Composer.
+This package itself can be installed through Composer.
 
 ```bash
 composer require spatie/searchindex

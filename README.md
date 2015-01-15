@@ -1,6 +1,7 @@
 Store and retrieve objects from Elasticsearch
 =================
 [![Latest Stable Version](https://poser.pugx.org/spatie/searchindex/version.png)](https://packagist.org/packages/spatie/searchindex)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e/mini.png)](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e)
 [![License](https://poser.pugx.org/spatie/searchindex/license.png)](https://packagist.org/packages/spatie/searchindex)
 
 This is an opinionated Laravel 4 | 5 package to store and retrieve objects from Elasticsearch.

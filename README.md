@@ -5,7 +5,9 @@ Store and retrieve objects from Elasticsearch
 [![Latest Stable Version](https://poser.pugx.org/spatie/searchindex/version.png)](https://packagist.org/packages/spatie/searchindex)
 [![License](https://poser.pugx.org/spatie/searchindex/license.png)](https://packagist.org/packages/spatie/searchindex)
 
-This is an opinionated Laravel 4 | 5 package to store and retrieve objects from Elasticsearch.
+This is an opinionated Laravel 4 | 5 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org).
+
+
 
 
 
@@ -39,7 +41,7 @@ This package also comes with a facade, which provides an easy way to call the th
 
 'aliases' => array(
 	...
-	'AnalyticsReports' => 'Spatie\SearchIndex\SearchIndexFacade',
+	'SearchIndex' => 'Spatie\SearchIndex\SearchIndexFacade',
 )
 ```
 

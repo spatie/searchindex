@@ -5,7 +5,7 @@ Store and retrieve objects from Elasticsearch
 [![Latest Stable Version](https://poser.pugx.org/spatie/searchindex/version.png)](https://packagist.org/packages/spatie/searchindex)
 [![License](https://poser.pugx.org/spatie/searchindex/license.png)](https://packagist.org/packages/spatie/searchindex)
 
-This is an opinionated Laravel 4 | 5 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org).
+This is an opinionated Laravel 4 | 5 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org). It was tailor made for a project I was working on and only provides the functionality that I needed. If you need full control over elasticsearch via PHP, take a look at [the official low-level client](https://github.com/elasticsearch/elasticsearch-php).
 
 
 
@@ -27,8 +27,9 @@ You must install this service provider.
 // Laravel 4: app/config/app.php
 
 'providers' => [
-    '...',
+    ...
     'Spatie\SearchIndex\SearchIndexServiceProvider'
+    ...
 ];
 ```
 
@@ -41,7 +42,8 @@ This package also comes with a facade, which provides an easy way to call the th
 
 'aliases' => array(
 	...
-	'SearchIndex' => 'Spatie\SearchIndex\SearchIndexFacade',
+	'SearchIndex' => 'Spatie\SearchIndex\SearchIndexFacade'
+	...
 )
 ```
 

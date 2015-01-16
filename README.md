@@ -7,8 +7,7 @@ Store and retrieve objects from Elasticsearch
 
 This is an opinionated Laravel 4 | 5 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org). It was tailormade for a project I was working on and only provides the functionality that I needed. If you need full control over elasticsearch via PHP, take a look at [the official low-level client](https://github.com/elasticsearch/elasticsearch-php).
 
-
-
+That being said, if you want an easy and simple syntax to work with elasticsearch, this is the package for you.
 
 
 ## Installation
@@ -135,7 +134,7 @@ class Product extends Eloquent implements Searchable
 }
 ```
 
-Thesearchindex will use the returned searchableType and searchableId to identify an object in the index. 
+The searchindex will use the returned searchableType and searchableId to identify an object in the index. 
 
 ###Add an object to the index
 If you are using the facade it couldn't be simpler.
@@ -204,10 +203,7 @@ The search results that come back are simply elasticsearch response elements ser
 ##Tests
 This package comes with a set of unit tests. Every time the package gets updated []Travis CI](https://travis-ci.org) will automatically run them.
 
-You can run them manually using phpspec
-```bash
-vendor/bin/phpspec run
-```
+You can aslo run them manually. You'll have first run ```composer install --dev``` to install phpspec. After that's out of the way you can run the tests with ```vendor/bin/phpspec run```.
 
 
 

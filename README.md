@@ -170,7 +170,7 @@ SearchIndex::clearIndex();
 ```
 
 ###Perform a search on the index
-
+You can retrieve search results with this method:
 ```php
 SearchIndex::getResults($query);
 ```

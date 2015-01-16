@@ -175,7 +175,7 @@ SearchIndex::getResults($query);
 ```
 ```$query``` should be an array that adheres to the scheme provided by [the elasticsearch documentation](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_search_operations.html).
 
-A query to perform a fuzzy like search on the index could look like this:
+A query to perform a fuzzy like search that operates all fields off the index could look like this:
 ```php
 $query =
     [

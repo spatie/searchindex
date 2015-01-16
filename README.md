@@ -138,7 +138,7 @@ class Product extends Eloquent implements Searchable
 Thesearchindex will use the returned searchableType and searchableId to identify an object in the index. 
 
 ###Add an object to the index
-If you are using the facade it couldn't be simpler
+If you are using the facade it couldn't be simpler.
 ```php
 //$product is an object that implements the Searchable interface
 
@@ -146,7 +146,7 @@ SearchIndex::upsertToIndex($product)
 ```
 
 ###Update an object in the index
-You probably could have guessed it:
+You probably would have guessed it.
 
 ```php
 //$product is an object that implements the Searchable interface
@@ -154,6 +154,7 @@ You probably could have guessed it:
 SearchIndex::upsertToIndex($product)
 ```
 ###Remove an object from the index
+Yep. Easy.
 
 ```php
 //$product is an object that implements the Searchable interface
@@ -162,10 +163,44 @@ SearchIndex::removeFromIndex($product)
 ```
 
 ###Clear the entire index
+If only you could to this with your facebook account.
 
 ```php
 SearchIndex::clearIndex();
 ```
+
+###Perform a search on the index
+
+```php
+SearchIndex::getResults($query);
+```
+```$query``` should be an array following the scheme provided by [the elasticsearch documentation](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_search_operations.html).
+
+A query to perform a fuzzy like search on the index could look like this:
+```php
+$query =
+    [
+        'body' =>
+            [
+                'from' => 0,
+                'size' => 500,
+                'query' =>
+                    [
+                        'fuzzy_like_this' =>
+                            [
+                                '_all' =>
+                                    [
+                                        'like_text' => $query,
+                                        'fuzziness' => 0.5,
+                                    ],
+                            ],
+
+                    ],
+            ]
+    ];
+```
+The search results that come back are simply elasticsearch response elements serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html) in the official elasticsearch documentation.
+
 
 
 

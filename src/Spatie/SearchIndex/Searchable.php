@@ -3,7 +3,7 @@
 interface Searchable {
 
     /**
-     * Returns an array with properties which must be searched
+     * Returns an array with properties which must be indexed
      *
      * @return array
      */

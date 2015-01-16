@@ -5,7 +5,7 @@ Store and retrieve objects from Elasticsearch
 [![Latest Stable Version](https://poser.pugx.org/spatie/searchindex/version.png)](https://packagist.org/packages/spatie/searchindex)
 [![License](https://poser.pugx.org/spatie/searchindex/license.png)](https://packagist.org/packages/spatie/searchindex)
 
-This is an opinionated Laravel 4 | 5 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org). It was tailor made for a project I was working on and only provides the functionality that I needed. If you need full control over elasticsearch via PHP, take a look at [the official low-level client](https://github.com/elasticsearch/elasticsearch-php).
+This is an opinionated Laravel 4 | 5 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org). It was tailormade for a project I was working on and only provides the functionality that I needed. If you need full control over elasticsearch via PHP, take a look at [the official low-level client](https://github.com/elasticsearch/elasticsearch-php).
 
 
 
@@ -54,8 +54,120 @@ You can publish the config file of the package using artisan
 php artisan config:publish spatie/searchindex
 ```
 
+The options in the config file are set with sane default values and they should be self-explanatory.
+
 
 ## Usage
 
+###Prepare your object
 
-Coming soon    
+Objects that you want to store in the index should implement the provided ```Spatie\SearchIndex\Searchable```- interface. 
+
+```php
+namespace Spatie\SearchIndex;
+
+interface Searchable {
+
+    /**
+     * Returns an array with properties which must be indexed
+     *
+     * @return array
+     */
+    public function getSearchableBody();
+
+    /**
+     * Return the type of the searchable subject
+     *
+     * @return string
+     */
+    public function getSearchableType();
+
+    /**
+     * Return the id of the searchable subject
+     *
+     * @return string
+     */
+    public function getSearchableId();
+```
+
+Here is an example how you could implement it with an Eloquent model:
+
+```php
+class Product extends Eloquent implements Searchable
+{
+    
+    ...
+    
+    /**
+     * Returns an array with properties which must be indexed
+     *
+     * @return array
+     */
+    public function getSearchableBody()
+    {
+        $searchableProperties = [
+        'name' => $product->name,
+        'brand' => $product->brand->name
+        'category' => $product->category->name
+        ];
+
+    }
+
+    /**
+     * Return the type of the searchable subject
+     *
+     * @return string
+     */
+    public function getSearchableType()
+    {
+        return 'product';
+    }
+
+    /**
+     * Return the id of the searchable subject
+     *
+     * @return string
+     */
+    public function getSearchableId()
+    {
+        return $this->id;
+    }
+}
+```
+
+Thesearchindex will use the returned searchableType and searchableId to identify an object in the index. 
+
+###Add an object to the index
+If you are using the facade it couldn't be simpler
+```php
+//$product is an object that implements the Searchable interface
+
+SearchIndex::upsertToIndex($product)
+```
+
+###Update an object in the index
+You probably could have guessed it:
+
+```php
+//$product is an object that implements the Searchable interface
+
+SearchIndex::upsertToIndex($product)
+```
+###Remove an object from the index
+
+```php
+//$product is an object that implements the Searchable interface
+
+SearchIndex::removeFromIndex($product)
+```
+
+###Clear the entire index
+
+```php
+SearchIndex::clearIndex();
+```
+
+
+
+
+

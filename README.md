@@ -202,7 +202,7 @@ $query =
 The search results that come back are simply elasticsearch response elements serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html) in the official elasticsearch documentation.
 
 ##Tests
-This package comes with a set of unit tests. Every time the package gets updated Travis CI will automatically run them.
+This package comes with a set of unit tests. Every time the package gets updated []Travis CI](https://travis-ci.org) will automatically run them.
 
 You can run them manually using phpspec
 ```bash

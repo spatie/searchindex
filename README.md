@@ -109,6 +109,8 @@ class Product extends Eloquent implements Searchable
         'brand' => $product->brand->name
         'category' => $product->category->name
         ];
+        
+        return $searchableProperties;
 
     }
 

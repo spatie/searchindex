@@ -47,7 +47,7 @@ This package also comes with a facade, which provides an easy way to call the th
 ```
 
 
-You can publish the config file of the package using artisan
+You can publish the config file of the package using artisan.
 
 ```bash
 php artisan config:publish spatie/searchindex
@@ -177,7 +177,7 @@ SearchIndex::getResults($query);
 ```
 ```$query``` should be an array that adheres to the scheme provided by [the elasticsearch documentation](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_search_operations.html).
 
-A query to perform a fuzzy like search that operates all fields off the index could look like this:
+A query to perform a fuzzy like search that operates all fields of the index could look like this:
 ```php
 $query =
     [
@@ -203,7 +203,7 @@ $query =
 The search results that come back are simply elasticsearch response elements serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html) in the official elasticsearch documentation.
 
 ##Tests
-This package comes with a set of unit tests. Every time the package gets updated []Travis CI](https://travis-ci.org) will automatically run them.
+This package comes with a set of unit tests. Every time the package gets updated [Travis CI](https://travis-ci.org) will automatically run them.
 
 You can aslo run them manually. You'll have first run ```composer install --dev``` to install phpspec. After that's out of the way you can run the tests with ```vendor/bin/phpspec run```.
 

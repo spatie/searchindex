@@ -27,7 +27,7 @@ You must install this service provider.
 
 'providers' => [
     ...
-    'Spatie\SearchIndex\SearchIndexServiceProvider'
+    'Spatie\SearchIndex\SearchIndexServiceProvider',
     ...
 ];
 ```
@@ -41,7 +41,7 @@ This package also comes with a facade, which provides an easy way to call the th
 
 'aliases' => array(
 	...
-	'SearchIndex' => 'Spatie\SearchIndex\SearchIndexFacade'
+	'SearchIndex' => 'Spatie\SearchIndex\SearchIndexFacade',
 	...
 )
 ```

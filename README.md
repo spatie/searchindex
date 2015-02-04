@@ -24,6 +24,7 @@ You must install this service provider.
 ```php
 
 // Laravel 4: app/config/app.php
+// Laravel 5: config/app.php
 
 'providers' => [
     ...

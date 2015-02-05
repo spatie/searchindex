@@ -39,6 +39,7 @@ This package also comes with a facade, which provides an easy way to call the th
 ```php
 
 // Laravel 4: app/config/app.php
+// Laravel 5: config/app.php
 
 'aliases' => array(
 	...

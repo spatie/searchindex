@@ -23,7 +23,6 @@ You must install this service provider.
 
 ```php
 
-// Laravel 4: app/config/app.php
 // Laravel 5: config/app.php
 
 'providers' => [
@@ -38,7 +37,6 @@ This package also comes with a facade, which provides an easy way to call the th
 
 ```php
 
-// Laravel 4: app/config/app.php
 // Laravel 5: config/app.php
 
 'aliases' => array(
@@ -52,7 +50,7 @@ This package also comes with a facade, which provides an easy way to call the th
 You can publish the config file of the package using artisan.
 
 ```bash
-php artisan config:publish spatie/searchindex
+php artisan vendor:publish --provider="Spatie\SearchIndex\SearchIndexServiceProvider"
 ```
 
 The options in the config file are set with sane default values and they should be self-explanatory.

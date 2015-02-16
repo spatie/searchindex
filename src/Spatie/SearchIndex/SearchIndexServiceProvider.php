@@ -5,7 +5,8 @@ use Exception;
 use Illuminate\Support\ServiceProvider;
 use Spatie\SearchIndex\SearchIndexHandlers\Elasticsearch as SearchHandler;
 
-class SearchIndexServiceProvider extends ServiceProvider {
+class SearchIndexServiceProvider extends ServiceProvider
+{
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -19,9 +20,12 @@ class SearchIndexServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
+
 	public function boot()
 	{
-		$this->package('spatie/searchindex');
+		$this->publishes([
+			__DIR__.'/../../config/searchindex.php' => config_path('searchindex.php'),
+		], 'config');
 	}
 
 	/**
@@ -34,11 +38,11 @@ class SearchIndexServiceProvider extends ServiceProvider {
 
 		$this->app->singleton('searchIndex', function($app)
 		{
-			switch($app['config']->get('searchindex::config.engine'))
+			switch($app['config']->get('searchindex.engine'))
 			{
 				case 'elasticsearch':
 
-					$config = $app['config']->get('searchindex::config.elasticsearch');
+					$config = $app['config']->get('searchindex.elasticsearch');
 
 					$elasticSearchClient = new ElasticsearchClient(
 						[
@@ -55,7 +59,7 @@ class SearchIndexServiceProvider extends ServiceProvider {
 					return $searchHandler;
 			}
 
-			throw new Exception($app['config']->get('searchindex::config.engine') . ' is not a valid search engine');
+			throw new Exception($app['config']->get('searchindexvend.engine') . ' is not a valid search engine');
 
 		});
 

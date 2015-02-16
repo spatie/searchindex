@@ -107,9 +107,9 @@ class Product extends Eloquent implements Searchable
     public function getSearchableBody()
     {
         $searchableProperties = [
-            'name' => $product->name,
-            'brand' => $product->brand->name
-            'category' => $product->category->name
+            'name' => $this->name,
+            'brand' => $this->brand->name
+            'category' => $this->category->name
         ];
         
         return $searchableProperties;

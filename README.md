@@ -13,7 +13,7 @@ That being said, if you want an easy and simple syntax to work with elasticsearc
 
 ## Laravel compatibility
 
- Laravel  | googlesearch
+ Laravel  | searchindex
 :---------|:----------
  4.2.x    | 1.x
  5.x      | 2.x

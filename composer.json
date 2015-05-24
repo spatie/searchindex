@@ -1,5 +1,6 @@
 {
     "name": "spatie/searchindex",
+    "homepage": "https://github.com/spatie/serachindex",
     "description": "Store and retrieve objects from Elasticsearch",
     "keywords":
     [

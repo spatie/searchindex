@@ -1,9 +1,9 @@
 Store and retrieve objects from Elasticsearch
 =================
-[![Build status](https://img.shields.io/travis/freekmurze/searchindex.svg)](https://travis-ci.org/freekmurze/searchindex)
-[![Latest Version](https://img.shields.io/github/release/freekmurze/searchindex.svg?style=flat-square)](https://github.com/freekmurze/searchindex/releases)
+[![Build status](https://img.shields.io/travis/spatie/searchindex.svg)](https://travis-ci.org/spatie/searchindex)
+[![Latest Version](https://img.shields.io/github/release/spatie/searchindex.svg?style=flat-square)](https://github.com/freekmurze/searchindex/releases)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/47cca532-7a48-4f62-ac66-77f9a0ef122e.svg)](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e)
-[![Quality Score](https://img.shields.io/scrutinizer/g/freekmurze/searchindex.svg?style=flat-square)](https://scrutinizer-ci.com/g/freekmurze/searchindex)
+[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/searchindex.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/searchindex)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/searchindex.svg?style=flat-square)](https://packagist.org/packages/spatie/searchindex)
 

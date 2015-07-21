@@ -11,6 +11,8 @@ This is an opinionated Laravel package to store and retrieve objects from [Elast
 
 That being said, if you want an easy and simple syntax to work with elasticsearch, this is the package for you.
 
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+
 ## Laravel compatibility
 
  Laravel  | searchindex
@@ -215,8 +217,5 @@ This package comes with a set of unit tests. Every time the package gets updated
 
 You can aslo run them manually. You'll have first run ```composer install --dev``` to install phpspec. After that's out of the way you can run the tests with ```vendor/bin/phpspec run```.
 
-
-
-
-
-
+##About Spatie
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).

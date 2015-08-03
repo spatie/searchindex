@@ -41,10 +41,10 @@ This package also comes with a facade, which provides an easy way to call the th
 
 // config/app.php
 
-'aliases' => array(
+'aliases' => [
 	...
 	'SearchIndex' => Spatie\SearchIndex\SearchIndexFacade::class,
-)
+]
 ```
 
 

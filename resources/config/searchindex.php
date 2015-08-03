@@ -35,5 +35,16 @@ return
                  * The name of the index elasticsearch will write to
                  */
                 'defaultIndexName' => 'main'
-            ]
+            ],
+
+        'algolia' =>
+            [
+                'defaultIndexName' => 'main',
+
+                'application-id' => env('ALGOLIA_APPLICATION_ID'),
+
+                'api-key' => env('ALGOLIA_ADMIN_API_KEY'),
+
+                'search-only-api-key' => env('ALGOLIA_SEARCH_ONLY_API_KEY'),
+            ],
     ];

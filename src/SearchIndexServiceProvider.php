@@ -3,7 +3,8 @@
 use Elasticsearch\Client as ElasticsearchClient;
 use Exception;
 use Illuminate\Support\ServiceProvider;
-use Spatie\SearchIndex\SearchIndexHandlers\Elasticsearch as SearchHandler;
+use Spatie\SearchIndex\SearchIndexHandlers\Algolia;
+use Spatie\SearchIndex\SearchIndexHandlers\Elasticsearch as ElasticSearchHandler;
 
 class SearchIndexServiceProvider extends ServiceProvider
 {
@@ -24,7 +25,7 @@ class SearchIndexServiceProvider extends ServiceProvider
 	public function boot()
 	{
 		$this->publishes([
-			__DIR__.'/../../config/searchindex.php' => config_path('searchindex.php'),
+			__DIR__.'/../resources/config/searchindex.php' => $this->app->configPath().'/'.'searchindex.php',
 		], 'config');
 	}
 
@@ -36,10 +37,8 @@ class SearchIndexServiceProvider extends ServiceProvider
 	public function register()
 	{
 
-		$this->app->singleton('searchIndex', function($app)
-		{
-			switch($app['config']->get('searchindex.engine'))
-			{
+		$this->app->singleton('searchIndex', function($app) {
+			switch ($app['config']->get('searchindex.engine')) {
 				case 'elasticsearch':
 
 					$config = $app['config']->get('searchindex.elasticsearch');
@@ -52,11 +51,30 @@ class SearchIndexServiceProvider extends ServiceProvider
 						]
 					);
 
-					$searchHandler = new SearchHandler($elasticSearchClient);
+					$searchHandler = new ElasticSearchHandler($elasticSearchClient);
 
 					$searchHandler->setIndexName($config['defaultIndexName']);
 
 					return $searchHandler;
+
+					break;
+
+				case 'algolia':
+
+					$config = $app['config']->get('searchindex.algolia');
+
+					$algoliaClient = new \AlgoliaSearch\Client(
+						$config['application-id'],
+						$config['api-key']
+					);
+
+					$searchHandler = new Algolia($algoliaClient);
+
+					$searchHandler->setIndexName($config['defaultIndexName']);
+
+					return $searchHandler;
+
+					break;
 			}
 
 			throw new Exception($app['config']->get('searchindexvend.engine') . ' is not a valid search engine');

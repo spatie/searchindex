@@ -1,9 +1,11 @@
-<?php namespace Spatie\SearchIndex;
+<?php
+
+namespace Spatie\SearchIndex;
 
 use Illuminate\Support\Facades\Facade;
 
-class SearchIndexFacade extends Facade {
-
+class SearchIndexFacade extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -12,7 +14,5 @@ class SearchIndexFacade extends Facade {
     protected static function getFacadeAccessor()
     {
         return 'searchIndex';
-
     }
-
 }

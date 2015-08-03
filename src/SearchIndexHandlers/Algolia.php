@@ -6,8 +6,8 @@ use AlgoliaSearch\Client;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandler;
 
-class Algolia implements SearchIndexHandler {
-
+class Algolia implements SearchIndexHandler
+{
     /**
      * @var \AlgoliaSearch\Client
      */
@@ -24,9 +24,10 @@ class Algolia implements SearchIndexHandler {
     }
 
     /**
-     * Set the name of the index that should be used by default
+     * Set the name of the index that should be used by default.
      *
      * @param $indexName
+     *
      * @return $this
      */
     public function setIndexName($indexName)
@@ -37,7 +38,7 @@ class Algolia implements SearchIndexHandler {
     }
 
     /**
-     * Add or update the given searchable subject to the index
+     * Add or update the given searchable subject to the index.
      *
      * @param Searchable $subject
      */
@@ -52,7 +53,7 @@ class Algolia implements SearchIndexHandler {
     }
 
     /**
-     * Remove the given subject from the search index
+     * Remove the given subject from the search index.
      *
      * @param Searchable $subject
      */
@@ -62,7 +63,7 @@ class Algolia implements SearchIndexHandler {
     }
 
     /**
-     * Remove everything from the index
+     * Remove everything from the index.
      *
      * @return mixed
      */
@@ -72,9 +73,10 @@ class Algolia implements SearchIndexHandler {
     }
 
     /**
-     * Get the results for the given query
+     * Get the results for the given query.
      *
      * @param array $query
+     *
      * @return mixed
      */
     public function getResults($query)
@@ -83,14 +85,14 @@ class Algolia implements SearchIndexHandler {
     }
 
     /**
-     * Get the id parameter that is used by Algolia
+     * Get the id parameter that is used by Algolia.
      *
      * @param Searchable $subject
+     *
      * @return array
      */
     protected function getIdArray(Searchable $subject)
     {
-        return ['objectID' => $subject->getSearchableType() . '-' . $subject->getSearchableId()];
+        return ['objectID' => $subject->getSearchableType().'-'.$subject->getSearchableId()];
     }
 }
-

@@ -1,4 +1,6 @@
-<?php namespace Spatie\SearchIndex;
+<?php
+
+namespace Spatie\SearchIndex;
 
 use Elasticsearch\Client as ElasticsearchClient;
 use Exception;
@@ -8,89 +10,80 @@ use Spatie\SearchIndex\SearchIndexHandlers\Elasticsearch as ElasticSearchHandler
 
 class SearchIndexServiceProvider extends ServiceProvider
 {
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
+    /**
+     * Bootstrap the application events.
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__.'/../resources/config/searchindex.php' => $this->app->configPath().'/'.'searchindex.php',
+        ], 'config');
+    }
 
-	/**
-	 * Bootstrap the application events.
-	 *
-	 * @return void
-	 */
+    /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->app->singleton('searchIndex', function ($app) {
+            switch ($app['config']->get('searchindex.engine')) {
+                case 'elasticsearch':
 
-	public function boot()
-	{
-		$this->publishes([
-			__DIR__.'/../resources/config/searchindex.php' => $this->app->configPath().'/'.'searchindex.php',
-		], 'config');
-	}
+                    $config = $app['config']->get('searchindex.elasticsearch');
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
+                    $elasticSearchClient = new ElasticsearchClient(
+                        [
+                            'hosts' => $config['hosts'],
+                            'logPath' => $config['logPath'],
+                            'logLevel' => $config['logLevel'],
+                        ]
+                    );
 
-		$this->app->singleton('searchIndex', function($app) {
-			switch ($app['config']->get('searchindex.engine')) {
-				case 'elasticsearch':
+                    $searchHandler = new ElasticSearchHandler($elasticSearchClient);
 
-					$config = $app['config']->get('searchindex.elasticsearch');
+                    $searchHandler->setIndexName($config['defaultIndexName']);
 
-					$elasticSearchClient = new ElasticsearchClient(
-						[
-							'hosts' => $config['hosts'],
-							'logPath' => $config['logPath'],
-							'logLevel' => $config['logLevel']
-						]
-					);
+                    return $searchHandler;
 
-					$searchHandler = new ElasticSearchHandler($elasticSearchClient);
+                    break;
 
-					$searchHandler->setIndexName($config['defaultIndexName']);
+                case 'algolia':
 
-					return $searchHandler;
+                    $config = $app['config']->get('searchindex.algolia');
 
-					break;
+                    $algoliaClient = new \AlgoliaSearch\Client(
+                        $config['application-id'],
+                        $config['api-key']
+                    );
 
-				case 'algolia':
+                    $searchHandler = new Algolia($algoliaClient);
 
-					$config = $app['config']->get('searchindex.algolia');
+                    $searchHandler->setIndexName($config['defaultIndexName']);
 
-					$algoliaClient = new \AlgoliaSearch\Client(
-						$config['application-id'],
-						$config['api-key']
-					);
+                    return $searchHandler;
 
-					$searchHandler = new Algolia($algoliaClient);
+                    break;
+            }
 
-					$searchHandler->setIndexName($config['defaultIndexName']);
+            throw new Exception($app['config']->get('searchindexvend.engine').' is not a valid search engine');
 
-					return $searchHandler;
+        });
+    }
 
-					break;
-			}
-
-			throw new Exception($app['config']->get('searchindexvend.engine') . ' is not a valid search engine');
-
-		});
-
-	}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return array('searchindex');
-	}
-
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array('searchindex');
+    }
 }

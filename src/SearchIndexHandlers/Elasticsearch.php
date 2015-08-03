@@ -1,11 +1,13 @@
-<?php namespace Spatie\SearchIndex\SearchIndexHandlers;
+<?php
+
+namespace Spatie\SearchIndex\SearchIndexHandlers;
 
 use Elasticsearch\Client;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandler;
 
-class Elasticsearch implements SearchIndexHandler {
-
+class Elasticsearch implements SearchIndexHandler
+{
     /**
      * @var Elasticsearch
      */
@@ -19,9 +21,10 @@ class Elasticsearch implements SearchIndexHandler {
     }
 
     /**
-     * Set the name of the index that should be used by default
+     * Set the name of the index that should be used by default.
      *
      * @param $indexName
+     *
      * @return $this
      */
     public function setIndexName($indexName)
@@ -32,25 +35,24 @@ class Elasticsearch implements SearchIndexHandler {
     }
 
     /**
-     * Add or update the given searchable subject to the index
+     * Add or update the given searchable subject to the index.
      *
      * @param Searchable $subject
      */
     public function upsertToIndex(Searchable $subject)
     {
-
         $this->elasticsearch->index(
             [
                 'index' => $this->indexName,
                 'type' => $subject->getSearchableType(),
                 'id' => $subject->getSearchableId(),
-                'body' => $subject->getSearchableBody()
+                'body' => $subject->getSearchableBody(),
             ]
         );
     }
 
     /**
-     * Remove the given subject from the search index
+     * Remove the given subject from the search index.
      *
      * @param Searchable $subject
      */
@@ -60,13 +62,13 @@ class Elasticsearch implements SearchIndexHandler {
             [
                 'index' => $this->indexName,
                 'type' => $subject->getSearchableType(),
-                'id' => $subject->getSearchableId()
+                'id' => $subject->getSearchableId(),
             ]
         );
     }
 
     /**
-     * Remove everything from the index
+     * Remove everything from the index.
      *
      * @return mixed
      */
@@ -76,9 +78,10 @@ class Elasticsearch implements SearchIndexHandler {
     }
 
     /**
-     * Get the results for the given query
+     * Get the results for the given query.
      *
      * @param array $query
+     *
      * @return mixed
      */
     public function getResults($query)
@@ -86,4 +89,3 @@ class Elasticsearch implements SearchIndexHandler {
         return $this->elasticsearch->search($query);
     }
 }
-

@@ -32,7 +32,7 @@ class Algolia implements SearchIndexHandler
      */
     public function setIndexName($indexName)
     {
-        $this->index = $this->algolia->setIndexName($indexName);
+        $this->index = $this->algolia->initIndex($indexName);
 
         return $this;
     }
@@ -47,7 +47,7 @@ class Algolia implements SearchIndexHandler
         $this->index->saveObject(
             array_merge(
                 $subject->getSearchableBody(),
-                $this->getIdArray($subject)
+                ['objectID' => $this->getAlgoliaId($subject)]
             )
         );
     }
@@ -59,7 +59,7 @@ class Algolia implements SearchIndexHandler
      */
     public function removeFromIndex(Searchable $subject)
     {
-        $this->index->deleteObject($this->getIdArray($subject));
+        $this->index->deleteObject($this->getAlgoliaId($subject));
     }
 
     /**
@@ -81,18 +81,19 @@ class Algolia implements SearchIndexHandler
      */
     public function getResults($query)
     {
-        return $this->algolia->search($query);
+        echo 'index search';
+        return $this->index->search($query);
     }
 
     /**
-     * Get the id parameter that is used by Algolia.
+     * Get the id parameter that is used by Algolia as an array.
      *
      * @param Searchable $subject
      *
-     * @return array
+     * @return string
      */
-    protected function getIdArray(Searchable $subject)
+    protected function getAlgoliaId($subject)
     {
-        return ['objectID' => $subject->getSearchableType().'-'.$subject->getSearchableId()];
+        return $subject->getSearchableType().'-'.$subject->getSearchableId();
     }
 }

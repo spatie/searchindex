@@ -8,9 +8,10 @@ Store and retrieve objects from a search index
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/searchindex.svg?style=flat-square)](https://packagist.org/packages/spatie/searchindex)
 
 This is an opinionated Laravel 5.1 package to store and retrieve objects from a search index.
-Currently [Elasticsearch](http://www.elasticsearch.org) and [Algolia](https://www.algolia.com).
+Currently [Elasticsearch](http://www.elasticsearch.org) and [Algolia](https://www.algolia.com) are supported.
 
-Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our
+open source projects [on our website](https://spatie.be/opensource).
 
 ## Installation
 This package can be installed through Composer.
@@ -42,7 +43,8 @@ This package also comes with a facade, which provides an easy way to call the th
 
 You can publish the config file of the package using artisan.
 
-The options in the config file are set with sane default values and they should be self-explanatory.
+The options in the config file are set with sane default values and they should
+be self-explanatory.
 
 The next installation steps depend on if you want to use Elasticsearch or Algolia.
 
@@ -68,7 +70,8 @@ composer require algolia/algoliasearch-client-php
 
 ###Prepare your object
 
-Objects that you want to store in the index should implement the provided ```Spatie\SearchIndex\Searchable```- interface. 
+Objects that you want to store in the index should implement the
+provided ```Spatie\SearchIndex\Searchable```- interface.
 
 ```php
 namespace Spatie\SearchIndex;
@@ -144,7 +147,8 @@ class Product extends Eloquent implements Searchable
 }
 ```
 
-The searchindex will use the returned searchableType and searchableId to identify an object in the index. 
+The searchindex will use the returned searchableType and searchableId to
+identify an object in the index.
 
 ###Add an object to the index
 If you are using the facade it couldn't be simpler.
@@ -184,10 +188,12 @@ You can retrieve search results with this method:
 SearchIndex::getResults($query);
 ```
 
-*Elasticsearch*
-```$query``` should be an array that adheres to the scheme provided by [the elasticsearch documentation](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_search_operations.html).
+####Elasticsearch
+```$query``` should be an array that adheres to the scheme provided
+by [the elasticsearch documentation](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_search_operations.html).
 
-A query to perform a fuzzy like search that operates all fields of the index could look like this:
+A query to perform a fuzzy like search that operates all fields of the index could
+look like this:
 ```php
 $query =
     [
@@ -212,7 +218,7 @@ $query =
 ```
 The search results that come back are simply elasticsearch response elements serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html) in the official elasticsearch documentation.
 
-*Algolia*
+####Algolia
 Provide link to algolia search parameters documentation.
 
 ##Tests

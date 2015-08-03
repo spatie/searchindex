@@ -7,18 +7,11 @@ Store and retrieve objects from Elasticsearch
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/searchindex.svg?style=flat-square)](https://packagist.org/packages/spatie/searchindex)
 
-This is an opinionated Laravel package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org). It was tailormade for a project I was working on and only provides the functionality that I needed. If you need full control over elasticsearch via PHP, take a look at [the official low-level client](https://github.com/elasticsearch/elasticsearch-php).
+This is an opinionated Laravel 5.1 package to store and retrieve objects from [Elasticsearch](http://www.elasticsearch.org). It was tailormade for a project I was working on and only provides the functionality that I needed. If you need full control over elasticsearch via PHP, take a look at [the official low-level client](https://github.com/elasticsearch/elasticsearch-php).
 
 That being said, if you want an easy and simple syntax to work with elasticsearch, this is the package for you.
 
 Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
-
-## Laravel compatibility
-
- Laravel  | searchindex
-:---------|:----------
- 4.2.x    | 1.x
- 5.x      | 2.x
 
 ## Installation
 To be able to use this package you should have a server with Elasticsearch installed. If you want to install it on your local development machine you can use [these instructions](https://github.com/fideloper/Vaprobash/blob/master/scripts/elasticsearch.sh) from the excellent [Vaprobash repo](https://github.com/fideloper/Vaprobash).
@@ -37,8 +30,7 @@ You must install this service provider.
 
 'providers' => [
     ...
-    'Spatie\SearchIndex\SearchIndexServiceProvider',
-    ...
+    Spatie\SearchIndex\SearchIndexServiceProvider::class,
 ];
 ```
 
@@ -47,12 +39,11 @@ This package also comes with a facade, which provides an easy way to call the th
 
 ```php
 
-// Laravel 5: config/app.php
+// config/app.php
 
 'aliases' => array(
 	...
-	'SearchIndex' => 'Spatie\SearchIndex\SearchIndexFacade',
-	...
+	'SearchIndex' => Spatie\SearchIndex\SearchIndexFacade::class,
 )
 ```
 

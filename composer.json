@@ -1,18 +1,19 @@
 {
     "name": "spatie/searchindex",
     "homepage": "https://github.com/spatie/serachindex",
-    "description": "Store and retrieve objects from Elasticsearch",
+    "description": "Store and retrieve objects from Elasticsearch or Algolia",
     "keywords":
     [
         "search",
         "index",
         "elasticsearch",
+        "algolia",
         "laravel"
     ],
     "license": "MIT",
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "4.2.*|5.*"
+        "php": ">=5.5.0",
+        "illuminate/support": "^5.1"
     },
     "suggest": {
         "elasticsearch/elasticsearch": "Install if you want use Elasticsearch as your search index",

@@ -11,10 +11,16 @@ class Elasticsearch implements SearchIndexHandler
     /**
      * @var Elasticsearch
      */
-    private $elasticsearch;
+    protected $elasticsearch;
 
-    private $indexName;
+    /**
+     * @var string
+     */
+    protected $indexName;
 
+    /**
+     * @param Client $elasticsearch
+     */
     public function __construct(Client $elasticsearch)
     {
         $this->elasticsearch = $elasticsearch;
@@ -87,5 +93,15 @@ class Elasticsearch implements SearchIndexHandler
     public function getResults($query)
     {
         return $this->elasticsearch->search($query);
+    }
+
+    /**
+     * Get the underlying client.
+     *
+     * @return Elasticsearch
+     */
+    public function getClient()
+    {
+        return $this->elasticsearch;
     }
 }

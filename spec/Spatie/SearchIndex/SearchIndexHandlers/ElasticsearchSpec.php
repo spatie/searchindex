@@ -25,11 +25,14 @@ class ElasticsearchSpec extends ObjectBehavior
         $this->searchableId = 1;
     }
 
-    public function let(Client $elasticsearch, Searchable $searchableObject)
+    public function let(Searchable $searchableObject)
     {
         $searchableObject->getSearchableBody()->willReturn($this->searchableBody);
         $searchableObject->getSearchableType()->willReturn($this->searchableType);
         $searchableObject->getSearchableId()->willReturn($this->searchableId);
+
+        $prophecy = (new \Prophecy\Prophet())->prophesize('ElasticSearch\Client');
+        $elasticsearch = $prophecy->reveal();
 
         $this->beConstructedWith($elasticsearch);
 

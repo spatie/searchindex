@@ -33,4 +33,11 @@ interface SearchIndexHandler
      * @return mixed
      */
     public function clearIndex();
+
+    /**
+     * Get the underlying client.
+     *
+     * @return mixed
+     */
+    public function getClient();
 }

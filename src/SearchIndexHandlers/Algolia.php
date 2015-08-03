@@ -81,7 +81,6 @@ class Algolia implements SearchIndexHandler
      */
     public function getResults($query)
     {
-        echo 'index search';
         return $this->index->search($query);
     }
 
@@ -95,5 +94,15 @@ class Algolia implements SearchIndexHandler
     protected function getAlgoliaId($subject)
     {
         return $subject->getSearchableType().'-'.$subject->getSearchableId();
+    }
+
+    /**
+     * Get the underlying client.
+     *
+     * @return \AlgoliaSearch\Client
+     */
+    public function getClient()
+    {
+        return $this->algolia;
     }
 }

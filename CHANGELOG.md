@@ -3,7 +3,7 @@
 All notable changes to laravel-glide will be documented in this file.
 
 ### 3.1.0
-- Added `removeFromIndexByTypeAndId` method.
+- Added `removeFromIndexByTypeAndId` method
 
 ### 3.0.1
 - Fix unknown engine exception message

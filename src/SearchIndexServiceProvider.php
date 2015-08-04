@@ -72,7 +72,7 @@ class SearchIndexServiceProvider extends ServiceProvider
                     break;
             }
 
-            throw new Exception($app['config']->get('searchindexvend.engine').' is not a valid search engine');
+            throw new Exception($app['config']->get('searchindex.engine').' is not a valid search engine');
 
         });
     }

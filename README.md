@@ -49,7 +49,7 @@ be self-explanatory.
 The next installation steps depend on if you want to use Elasticsearch or Algolia.
 
 ###Elasticsearch
-To use Elasticsearch you must install this official low level client:
+To use Elasticsearch you must install the official low level client:
 ```bash
 composer require elasticsearch/elasticsearch
 ```
@@ -61,7 +61,7 @@ from the excellent [Vaprobash repo](https://github.com/fideloper/Vaprobash).
 
 
 ###Algolia
-To use Algolia you must install this official low level client:
+To use Algolia you must install the official low level client:
 ```bash
 composer require algolia/algoliasearch-client-php
 ```
@@ -219,7 +219,12 @@ $query =
 The search results that come back are simply elasticsearch response elements serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html) in the official elasticsearch documentation.
 
 ####Algolia
-Provide link to algolia search parameters documentation.
+You can just pass a string to search the index:
+```php
+SearchIndex::getResults('look for this');
+```
+To learn how to perform more advanced queries you can read the [official documentation](https://github.com/algolia/algoliasearch-client-php#search)
+
 
 ##Tests
 This package comes with a set of unit tests. Every time the package gets updated [Travis CI](https://travis-ci.org) will automatically run them.

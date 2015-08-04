@@ -41,10 +41,13 @@ This package also comes with a facade, which provides an easy way to call the th
 ]
 ```
 
-You can publish the config file of the package using artisan.
+You can publish the config-file with:
+```bash
+php artisan vendor:publish --provider="Spatie\SearchIndex\SearchIndexServiceProvider"
+```
 
 The options in the config file are set with sane default values and they should
-be self-explanatory.
+be self-explanatory. 
 
 The next installation steps depend on if you want to use Elasticsearch or Algolia.
 

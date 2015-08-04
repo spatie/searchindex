@@ -68,6 +68,19 @@ class ElasticsearchSpec extends ObjectBehavior
         $this->removeFromIndex($searchableObject);
     }
 
+    public function it_an_object_from_the_index_by_type_and_id(Client $elasticsearch)
+    {
+        $elasticsearch->delete(
+            [
+                'index' => $this->indexName,
+                'type' => $this->searchableType,
+                'id' => $this->searchableId,
+            ]
+        )->shouldBeCalled();
+
+        $this->removeFromIndexByTypeAndId($this->searchableType, $this->searchableId);
+    }
+
     /*
      * Need to figure how to test the clearIndex function
      *

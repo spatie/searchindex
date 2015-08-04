@@ -61,6 +61,13 @@ class AlgoliaSpec extends ObjectBehavior
         $this->removeFromIndex($searchableObject);
     }
 
+    public function it_removes_an_object_from_the_index_by_type_and_id(\AlgoliaSearch\Index $index)
+    {
+        $index->deleteObject($this->searchableType.'-'.$this->searchableId)->shouldBeCalled();
+
+        $this->removeFromIndexByTypeAndId($this->searchableType, $this->searchableId);
+    }
+
     public function it_can_clear_the_index(\AlgoliaSearch\Index $index)
     {
         $index->clearIndex()->shouldBeCalled();

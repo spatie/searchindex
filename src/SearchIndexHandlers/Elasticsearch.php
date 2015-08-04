@@ -74,6 +74,23 @@ class Elasticsearch implements SearchIndexHandler
     }
 
     /**
+     * Remove an item from the search index by type and id.
+     *
+     * @param string $type
+     * @param int $id
+     */
+    public function removeFromIndexByTypeAndId($type, $id)
+    {
+        $this->elasticsearch->delete(
+            [
+                'index' => $this->indexName,
+                'type' => $type,
+                'id' => $id,
+            ]
+        );
+    }
+
+    /**
      * Remove everything from the index.
      *
      * @return mixed
@@ -104,4 +121,6 @@ class Elasticsearch implements SearchIndexHandler
     {
         return $this->elasticsearch;
     }
+
+
 }

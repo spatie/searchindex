@@ -28,6 +28,14 @@ interface SearchIndexHandler
     public function removeFromIndex(Searchable $subject);
 
     /**
+     * Remove an item from the search index by type and id.
+     *
+     * @param string $type
+     * @param int $id
+     */
+    public function removeFromIndexByTypeAndId($type, $id);
+
+    /**
      * Remove everything from the index.
      *
      * @return mixed

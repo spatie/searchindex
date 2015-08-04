@@ -63,6 +63,17 @@ class Algolia implements SearchIndexHandler
     }
 
     /**
+     * Remove an item from the search index by type and id.
+     *
+     * @param string $type
+     * @param int $id
+     */
+    public function removeFromIndexByTypeAndId($type, $id)
+    {
+        $this->index->deleteObject($type.'-'.$id);
+    }
+
+    /**
      * Remove everything from the index.
      *
      * @return mixed
@@ -105,4 +116,6 @@ class Algolia implements SearchIndexHandler
     {
         return $this->algolia;
     }
+
+
 }

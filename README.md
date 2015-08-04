@@ -178,6 +178,13 @@ Yep. Easy.
 SearchIndex::removeFromIndex($product)
 ```
 
+Alternatively you can remove an object from the index by passing the type and id:
+
+```php
+SearchIndex::removeFromIndexByTypeAndId('product', 1)
+```
+This can be handy when you've already deleted your model.
+
 ###Clear the entire index
 If only you could to this with your facebook account.
 

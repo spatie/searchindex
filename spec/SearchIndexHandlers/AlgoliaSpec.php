@@ -28,19 +28,18 @@ class AlgoliaSpec extends ObjectBehavior
         $this->searchableId = 1;
     }
 
-    function let(Client $algolia, Searchable $searchableObject, \AlgoliaSearch\Index $index)
+    function let(Client $algoliaClient, Searchable $searchableObject, \AlgoliaSearch\Index $index)
     {
         $searchableObject->getSearchableBody()->willReturn($this->searchableBody);
         $searchableObject->getSearchableType()->willReturn($this->searchableType);
         $searchableObject->getSearchableId()->willReturn($this->searchableId);
 
-
         $this->index = $index;
 
-        $this->beConstructedWith($algolia);
+        $this->beConstructedWith($algoliaClient);
 
-        $algolia->initIndex($this->indexName)->willReturn($this->index);
-var_dump($algolia); die();
+        $algoliaClient->initIndex($this->indexName)->willReturn($this->index);
+var_dump($algoliaClient); die();
 
 
         $this->setIndexName($this->indexName);

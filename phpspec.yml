@@ -1,0 +1,5 @@
+suites:
+    searchindex_suite:
+        namespace: Spatie\SearchIndex
+        psr4_prefix: Spatie\SearchIndex
+        src_path: src

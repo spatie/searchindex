@@ -34,15 +34,9 @@ class AlgoliaSpec extends ObjectBehavior
         $searchableObject->getSearchableType()->willReturn($this->searchableType);
         $searchableObject->getSearchableId()->willReturn($this->searchableId);
 
-        $this->index = $index;
-
         $this->beConstructedWith($algoliaClient);
 
-        $algoliaClient->initIndex($this->indexName)->willReturn($this->index);
-var_dump($algoliaClient); die();
-
-
-        $this->setIndexName($this->indexName);
+        $this->index = $index;
     }
 
     function it_is_initializable()
@@ -50,9 +44,9 @@ var_dump($algoliaClient); die();
         $this->shouldHaveType(Algolia::class);
     }
 
-    function it_adds_a_searchable_object_to_the_search_index(Client $algolia, Searchable $searchableObject)
+    function it_adds_a_searchable_object_to_the_search_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
     {
-        $this->index->saveObject(
+        $index->saveObject(
             array_merge(
                 $this->searchableBody,
                 ['objectID' => $this->searchableId.'-'.$this->searchableType]
@@ -62,9 +56,9 @@ var_dump($algoliaClient); die();
         $this->upsertToIndex($searchableObject);
     }
 
-    function it_removes_a_searchable_object_from_the_index(Client $algolia, Searchable $searchableObject)
+    function it_removes_a_searchable_object_from_the_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
     {
-        $algolia->delete(
+        $index->deleteObject(
             [
                 'index' => $this->indexName,
                 'type' => $this->searchableType,
@@ -88,11 +82,11 @@ var_dump($algoliaClient); die();
     */
 
 
-    function it_can_get_search_results(Client $algolia)
+    function it_can_get_search_results(\AlgoliaSearch\Index $index)
     {
         $query = 'this is a testquery';
 
-        $algolia->search($query)->shouldBeCalled();
+        $index->search($query)->shouldBeCalled();
 
         $this->getResults($query);
     }

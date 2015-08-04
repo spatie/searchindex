@@ -16,7 +16,7 @@ class Algolia implements SearchIndexHandler
     /**
      * @var \AlgoliaSearch\Index
      */
-    protected $index;
+    public $index;
 
     public function __construct(Client $algolia)
     {

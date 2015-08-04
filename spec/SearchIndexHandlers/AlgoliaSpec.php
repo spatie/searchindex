@@ -2,12 +2,13 @@
 
 namespace spec\Spatie\SearchIndex\SearchIndexHandlers;
 
-use Elasticsearch\Client;
+use AlgoliaSearch\Client;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Spatie\SearchIndex\Searchable;
+use Spatie\SearchIndex\SearchIndexHandlers\Algolia;
 
-class ElasticsearchSpec extends ObjectBehavior
+class AlgoliaSpec extends ObjectBehavior
 {
 
     protected $indexName;
@@ -27,39 +28,44 @@ class ElasticsearchSpec extends ObjectBehavior
         $this->searchableId = 1;
     }
 
-    function let(Client $elasticsearch, Searchable $searchableObject)
+    function let(Client $algolia, Searchable $searchableObject, \AlgoliaSearch\Index $index)
     {
         $searchableObject->getSearchableBody()->willReturn($this->searchableBody);
         $searchableObject->getSearchableType()->willReturn($this->searchableType);
         $searchableObject->getSearchableId()->willReturn($this->searchableId);
 
-        $this->beConstructedWith($elasticsearch);
+
+        $this->index = $index;
+
+        $this->beConstructedWith($algolia);
+
+        $algolia->initIndex($this->indexName)->willReturn($this->index);
+var_dump($algolia); die();
+
 
         $this->setIndexName($this->indexName);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Spatie\SearchIndex\SearchIndexHandlers\Elasticsearch');
+        $this->shouldHaveType(Algolia::class);
     }
 
-    function it_adds_a_searchable_object_to_the_search_index(Client $elasticsearch, Searchable $searchableObject)
+    function it_adds_a_searchable_object_to_the_search_index(Client $algolia, Searchable $searchableObject)
     {
-        $elasticsearch->index(
-            [
-                'index' => $this->indexName,
-                'type' => $this->searchableType,
-                'id' => $this->searchableId,
-                'body' => $this->searchableBody
-            ]
+        $this->index->saveObject(
+            array_merge(
+                $this->searchableBody,
+                ['objectID' => $this->searchableId.'-'.$this->searchableType]
+            )
         )->shouldBeCalled();
 
         $this->upsertToIndex($searchableObject);
     }
 
-    function it_removes_a_searchable_object_from_the_index(Client $elasticsearch, Searchable $searchableObject)
+    function it_removes_a_searchable_object_from_the_index(Client $algolia, Searchable $searchableObject)
     {
-        $elasticsearch->delete(
+        $algolia->delete(
             [
                 'index' => $this->indexName,
                 'type' => $this->searchableType,
@@ -73,21 +79,21 @@ class ElasticsearchSpec extends ObjectBehavior
     /*
      * Need to figure how to test the clearIndex function
      *
-        function it_can_clear_the_index(Client $elasticsearch)
+        function it_can_clear_the_index(Client $algolia)
         {
 
-            $elasticsearch->indices()->delete(['index' => $this->indexName]);
+            $algolia->indices()->delete(['index' => $this->indexName]);
 
             $this->clearIndex();
         }
     */
 
 
-    function it_can_get_search_results(Client $elasticsearch)
+    function it_can_get_search_results(Client $algolia)
     {
         $query = 'this is a testquery';
 
-        $elasticsearch->search($query)->shouldBeCalled();
+        $algolia->search($query)->shouldBeCalled();
 
         $this->getResults($query);
     }

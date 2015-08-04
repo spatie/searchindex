@@ -1,6 +1,6 @@
 {
     "name": "spatie/searchindex",
-    "homepage": "https://github.com/spatie/serachindex",
+    "homepage": "https://github.com/spatie/searchindex",
     "description": "Store and retrieve objects from Elasticsearch or Algolia",
     "keywords":
     [
@@ -19,9 +19,10 @@
         "elasticsearch/elasticsearch": "Install if you want use Elasticsearch as your search index",
         "algolia/algoliasearch-client-php": "Install if you want use Algolia as your search index"
     },
-
     "require-dev": {
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "^2.1",
+        "elasticsearch/elasticsearch": "^1.3",
+        "algolia/algoliasearch-client-php": "^1.6"
     },
     "autoload": {
         "psr-4": {

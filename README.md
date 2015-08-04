@@ -158,7 +158,7 @@ If you are using the facade it couldn't be simpler.
 ```php
 //$product is an object that implements the Searchable interface
 
-SearchIndex::upsertToIndex($product)
+SearchIndex::upsertToIndex($product);
 ```
 
 ###Update an object in the index
@@ -167,7 +167,7 @@ You probably would have guessed it.
 ```php
 //$product is an object that implements the Searchable interface
 
-SearchIndex::upsertToIndex($product)
+SearchIndex::upsertToIndex($product);
 ```
 ###Remove an object from the index
 Yep. Easy.
@@ -175,13 +175,13 @@ Yep. Easy.
 ```php
 //$product is an object that implements the Searchable interface
 
-SearchIndex::removeFromIndex($product)
+SearchIndex::removeFromIndex($product);
 ```
 
-Alternatively you can remove an object from the index by passing the type and id:
+Alternatively you can remove an object from the index by passing type and id:
 
 ```php
-SearchIndex::removeFromIndexByTypeAndId('product', 1)
+SearchIndex::removeFromIndexByTypeAndId('product', 1);
 ```
 This can be handy when you've already deleted your model.
 

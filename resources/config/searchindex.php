@@ -5,13 +5,12 @@ return
         /*
          * The engine behind the search index. Currently the only valid option is elasticsearch
          */
-
         'engine' => 'elasticsearch',
 
         'elasticsearch' =>
             [
                 /*
-                 * Specify the host(s) where elasticsearch is running
+                 * Specify the host(s) where elasticsearch is running.
                  */
                 'hosts' =>
                     [
@@ -19,7 +18,7 @@ return
                     ],
 
                 /*
-                 * specify the path where elasticsearch will write it's logs
+                 * Specify the path where Elasticsearch will write it's logs.
                  */
                 'logPath' =>  storage_path() . '/logs/elasticsearch.log',
 
@@ -32,15 +31,22 @@ return
                 'logLevel' => 200,
 
                 /*
-                 * The name of the index elasticsearch will write to
+                 * The name of the index elasticsearch will write to.
                  */
                 'defaultIndexName' => 'main'
             ],
 
         'algolia' =>
             [
+                /*
+                 * This index will be used whenever you don't explicitly
+                 * set one yourself.
+                 */
                 'defaultIndexName' => 'main',
 
+                /*
+                 * You'll find the right values on the Algolia credentials page.
+                 */
                 'application-id' => env('ALGOLIA_APPLICATION_ID'),
 
                 'api-key' => env('ALGOLIA_ADMIN_API_KEY'),

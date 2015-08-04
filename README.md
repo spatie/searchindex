@@ -227,6 +227,11 @@ SearchIndex::getResults('look for this');
 To learn how to perform more advanced queries you can read
 the [official documentation](https://github.com/algolia/algoliasearch-client-php#search).
 
+###All other operations
+For all other operations you can get the underlying client:
+```php
+SearchIndex::getClient(); // will return the Elasticsearch or Algolia client.
+```
 
 ##Tests
 This package comes with a set of unit tests. Every time the package

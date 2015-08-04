@@ -31,7 +31,7 @@ interface SearchIndexHandler
      * Remove an item from the search index by type and id.
      *
      * @param string $type
-     * @param int $id
+     * @param int    $id
      */
     public function removeFromIndexByTypeAndId($type, $id);
 

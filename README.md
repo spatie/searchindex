@@ -23,7 +23,7 @@ composer require spatie/searchindex
 You must install this service provider.
 
 ```php
-// Laravel 5: config/app.php
+// config/app.php
 'providers' => [
     ...
     Spatie\SearchIndex\SearchIndexServiceProvider::class,

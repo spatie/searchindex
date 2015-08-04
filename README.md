@@ -207,7 +207,7 @@ $query =
                             [
                                 '_all' =>
                                     [
-                                        'like_text' => $query,
+                                        'like_text' => 'look for this',
                                         'fuzziness' => 0.5,
                                     ],
                             ],

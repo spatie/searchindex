@@ -49,7 +49,7 @@ class AlgoliaSpec extends ObjectBehavior
         $index->saveObject(
             array_merge(
                 $this->searchableBody,
-                ['objectID' => $this->searchableId.'-'.$this->searchableType]
+                ['objectID' => $this->searchableType.'-'.$this->searchableId]
             )
         )->shouldBeCalled();
 
@@ -58,28 +58,20 @@ class AlgoliaSpec extends ObjectBehavior
 
     function it_removes_a_searchable_object_from_the_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
     {
-        $index->deleteObject(
-            [
-                'index' => $this->indexName,
-                'type' => $this->searchableType,
-                'id' => $this->searchableId,
-            ]
-        )->shouldBeCalled();
+        $index->deleteObject($this->searchableType.'-'.$this->searchableId)->shouldBeCalled();
 
         $this->removeFromIndex($searchableObject);
     }
 
-    /*
-     * Need to figure how to test the clearIndex function
-     *
-        function it_can_clear_the_index(Client $algolia)
+
+        function it_can_clear_the_index(\AlgoliaSearch\Index $index)
         {
 
-            $algolia->indices()->delete(['index' => $this->indexName]);
+            $index->clearIndex()->shouldBeCalled();
 
             $this->clearIndex();
         }
-    */
+    
 
 
     function it_can_get_search_results(\AlgoliaSearch\Index $index)

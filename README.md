@@ -211,25 +211,29 @@ $query =
                                         'fuzziness' => 0.5,
                                     ],
                             ],
-
                     ],
             ]
     ];
 ```
-The search results that come back are simply elasticsearch response elements serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html) in the official elasticsearch documentation.
+The search results that come back are simply elasticsearch response elements
+serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html)
+in the official elasticsearch documentation.
 
 ####Algolia
 You can just pass a string to search the index:
 ```php
 SearchIndex::getResults('look for this');
 ```
-To learn how to perform more advanced queries you can read the [official documentation](https://github.com/algolia/algoliasearch-client-php#search)
+To learn how to perform more advanced queries you can read
+the [official documentation](https://github.com/algolia/algoliasearch-client-php#search).
 
 
 ##Tests
-This package comes with a set of unit tests. Every time the package gets updated [Travis CI](https://travis-ci.org) will automatically run them.
+This package comes with a set of unit tests. Every time the package
+gets updated [Travis CI](https://travis-ci.org) will automatically run them.
 
-You can aslo run them manually. You'll have first run ```composer install --dev``` to install phpspec. After that's out of the way you can run the tests with ```vendor/bin/phpspec run```.
+You can also run them manually. You'll have first run ```composer install --dev``` to install phpspec. After that's out of the way you can run the tests with ```vendor/bin/phpspec run```.
 
 ##About Spatie
-Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
+Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all
+our open source projects [on our website](https://spatie.be/opensource).

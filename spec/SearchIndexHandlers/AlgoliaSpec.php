@@ -4,13 +4,11 @@ namespace spec\Spatie\SearchIndex\SearchIndexHandlers;
 
 use AlgoliaSearch\Client;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandlers\Algolia;
 
 class AlgoliaSpec extends ObjectBehavior
 {
-
     protected $indexName;
 
     protected $searchableBody;
@@ -28,7 +26,7 @@ class AlgoliaSpec extends ObjectBehavior
         $this->searchableId = 1;
     }
 
-    function let(Client $algoliaClient, Searchable $searchableObject, \AlgoliaSearch\Index $index)
+    public function let(Client $algoliaClient, Searchable $searchableObject, \AlgoliaSearch\Index $index)
     {
         $searchableObject->getSearchableBody()->willReturn($this->searchableBody);
         $searchableObject->getSearchableType()->willReturn($this->searchableType);
@@ -39,12 +37,12 @@ class AlgoliaSpec extends ObjectBehavior
         $this->index = $index;
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(Algolia::class);
     }
 
-    function it_adds_a_searchable_object_to_the_search_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
+    public function it_adds_a_searchable_object_to_the_search_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
     {
         $index->saveObject(
             array_merge(
@@ -56,25 +54,21 @@ class AlgoliaSpec extends ObjectBehavior
         $this->upsertToIndex($searchableObject);
     }
 
-    function it_removes_a_searchable_object_from_the_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
+    public function it_removes_a_searchable_object_from_the_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
     {
         $index->deleteObject($this->searchableType.'-'.$this->searchableId)->shouldBeCalled();
 
         $this->removeFromIndex($searchableObject);
     }
 
+    public function it_can_clear_the_index(\AlgoliaSearch\Index $index)
+    {
+        $index->clearIndex()->shouldBeCalled();
 
-        function it_can_clear_the_index(\AlgoliaSearch\Index $index)
-        {
+        $this->clearIndex();
+    }
 
-            $index->clearIndex()->shouldBeCalled();
-
-            $this->clearIndex();
-        }
-    
-
-
-    function it_can_get_search_results(\AlgoliaSearch\Index $index)
+    public function it_can_get_search_results(\AlgoliaSearch\Index $index)
     {
         $query = 'this is a testquery';
 
@@ -82,5 +76,4 @@ class AlgoliaSpec extends ObjectBehavior
 
         $this->getResults($query);
     }
-
 }

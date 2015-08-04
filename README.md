@@ -47,7 +47,7 @@ php artisan vendor:publish --provider="Spatie\SearchIndex\SearchIndexServiceProv
 ```
 
 The options in the config file are set with sane default values and they should
-be self-explanatory.
+be self-explanatory. 
 
 The next installation steps depend on if you want to use Elasticsearch or Algolia.
 

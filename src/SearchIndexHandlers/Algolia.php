@@ -3,6 +3,7 @@
 namespace Spatie\SearchIndex\SearchIndexHandlers;
 
 use AlgoliaSearch\Client;
+use Illuminate\Support\Collection;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandler;
 
@@ -92,7 +93,17 @@ class Algolia implements SearchIndexHandler
      */
     public function getResults($query)
     {
-        return $this->index->search($query);
+        $parameters = [];
+
+        if (is_array($query)) {
+            $collection = new Collection($query);
+
+            $query = $collection->pull('query', '');
+
+            $parameters = $collection->toArray();
+        }
+
+        return $this->index->search($query, $parameters);
     }
 
     /**

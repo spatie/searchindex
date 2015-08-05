@@ -79,7 +79,32 @@ class AlgoliaSpec extends ObjectBehavior
     {
         $query = 'this is a testquery';
 
-        $index->search($query)->shouldBeCalled();
+        $index->search($query, [])->shouldBeCalled();
+
+        $this->getResults($query);
+    }
+
+    public function it_can_get_search_results_using_an_array(\AlgoliaSearch\Index $index)
+    {
+        $query = [
+            'query' => 'raw query',
+            'param1' => 'yes',
+            'param2' => 'no',
+        ];
+
+        $index->search('raw query', ['param1' => 'yes', 'param2' => 'no'])->shouldBeCalled();
+
+        $this->getResults($query);
+    }
+
+    public function it_can_get_search_results_using_an_array_without_a_query_key(\AlgoliaSearch\Index $index)
+    {
+        $query = [
+            'param1' => 'yes',
+            'param2' => 'no',
+        ];
+
+        $index->search('', ['param1' => 'yes', 'param2' => 'no'])->shouldBeCalled();
 
         $this->getResults($query);
     }

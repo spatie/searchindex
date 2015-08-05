@@ -10,6 +10,14 @@ Store and retrieve objects from a search index
 This is an opinionated Laravel 5.1 package to store and retrieve objects from a search index.
 Currently [Elasticsearch](http://www.elasticsearch.org) and [Algolia](https://www.algolia.com) are supported.
 
+Once the package is installed objects can be easily indexed and retrieved:
+```php
+//$product is an object that implements the Searchable interface
+SearchIndex::upsertToIndex($product);
+
+SearchIndex::getResults('look for this');
+```php
+
 Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our
 open source projects [on our website](https://spatie.be/opensource).
 

@@ -234,8 +234,8 @@ You can just pass a string to search the index:
 ```php
 SearchIndex::getResults('look for this');
 ```
-To learn how to perform more advanced queries you can read
-the [official documentation](https://github.com/algolia/algoliasearch-client-php#search).
+To learn how to perform more advanced queries an array may be passed. Read
+the [official documentation](https://github.com/algolia/algoliasearch-client-php#search) to learn what's possible.
 
 ###All other operations
 For all other operations you can get the underlying client:

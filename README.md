@@ -16,7 +16,7 @@ Once the package is installed objects can be easily indexed and retrieved:
 SearchIndex::upsertToIndex($product);
 
 SearchIndex::getResults('look for this');
-```php
+```
 
 Spatie is webdesign agency in Antwerp, Belgium. You'll find an overview of all our
 open source projects [on our website](https://spatie.be/opensource).

@@ -4,6 +4,7 @@ namespace spec\Spatie\SearchIndex\SearchIndexHandlers;
 
 use AlgoliaSearch\Client;
 use PhpSpec\ObjectBehavior;
+use Spatie\SearchIndex\Query\Algolia\SearchQuery;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandlers\Algolia;
 
@@ -95,6 +96,17 @@ class AlgoliaSpec extends ObjectBehavior
         $index->search('raw query', ['param1' => 'yes', 'param2' => 'no'])->shouldBeCalled();
 
         $this->getResults($query);
+    }
+
+    public function it_can_get_search_results_using_a_search_object(\AlgoliaSearch\Index $index)
+    {
+        $searchQuery = new SearchQuery();
+
+        $searchQuery->searchFor('my query');
+
+        $index->search('my query', ["numericFilters" => "", "facetFilters" => "", "hitsPerPage" => 10000])->shouldBeCalled();
+
+        $this->getResults($searchQuery);
     }
 
     public function it_can_get_search_results_using_an_array_without_a_query_key(\AlgoliaSearch\Index $index)

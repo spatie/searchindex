@@ -245,10 +245,27 @@ SearchIndex::getResults('look for this');
 To perform more advanced queries an array may be passed. Read
 the [official documentation](https://github.com/algolia/algoliasearch-client-php#search) to learn what's possible.
 
+
+
 ###All other operations
 For all other operations you can get the underlying client:
 ```php
 SearchIndex::getClient(); // will return the Elasticsearch or Algolia client.
+```
+
+##Query helpers
+
+If you're using Algolia you can use a `SearchQuery`-object to perform searches.
+
+```php
+use Spatie\SearchIndex\Query\Algolia\SearchIndex();
+
+$searchQuery = new SearchQuery();
+$searchQuery->searchFor('my query')
+            ->withFacet('facetName', 'facetValue');
+
+//a searchQuery object may be passed to the getResults-function directly.
+SearchIndex::getResults($searchQuery);
 ```
 
 ##Tests

@@ -4,6 +4,7 @@ namespace Spatie\SearchIndex\SearchIndexHandlers;
 
 use AlgoliaSearch\Client;
 use Illuminate\Support\Collection;
+use Spatie\SearchIndex\Query\Algolia\SearchQuery;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandler;
 
@@ -87,13 +88,17 @@ class Algolia implements SearchIndexHandler
     /**
      * Get the results for the given query.
      *
-     * @param array $query
+     * @param string|array|\Spatie\SearchIndex\Query\Algolia\SearchQuery $query
      *
      * @return mixed
      */
     public function getResults($query)
     {
         $parameters = [];
+
+        if (is_object($query) && $query instanceof SearchQuery) {
+            $query = $query->toArray();
+        }
 
         if (is_array($query)) {
             $collection = new Collection($query);

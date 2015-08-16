@@ -2,6 +2,9 @@
 
 All notable changes to laravel-glide will be documented in this file.
 
+### 3.2.0
+- Added SearchQuery object for Algolia
+
 ### 3.1.1
 - Fixed a bug that caused using extra Algolia query parameters to throw an exception.
 

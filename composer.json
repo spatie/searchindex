@@ -16,7 +16,7 @@
         "illuminate/support": "^5.1"
     },
     "suggest": {
-        "elasticsearch/elasticsearch": "Install if you want use Elasticsearch as your search index",
+        "elasticsearch/elasticsearch": "Install if you want use Elasticsearch as your search index. Use version constraint ^1.3",
         "algolia/algoliasearch-client-php": "Install if you want use Algolia as your search index"
     },
     "require-dev": {

@@ -60,9 +60,9 @@ be self-explanatory.
 The next installation steps depend on if you want to use Elasticsearch or Algolia.
 
 ###Elasticsearch
-To use Elasticsearch you must install the official low level client:
+To use Elasticsearch you must install the official 1.x series low level client:
 ```bash
-composer require elasticsearch/elasticsearch
+composer require elasticsearch/elasticsearch "^1.3"
 ```
 
 You also should have a server with Elasticsearch installed.

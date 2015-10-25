@@ -3,7 +3,8 @@
 return
     [
         /*
-         * The engine behind the search index. Currently the only valid option is elasticsearch
+         * The engine that powers the search index. You can choose between 'elasticsearch'
+         * and 'algolia'.
          */
         'engine' => 'elasticsearch',
 

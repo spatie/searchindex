@@ -3,7 +3,7 @@
 All notable changes to laravel-glide will be documented in this file.
 
 ### 3.2.1 - 2015-05-22
-- Made same SearchQuery methods chainable
+- Made some SearchQuery methods chainable
 
 ### 3.2.0
 - Added SearchQuery object for Algolia

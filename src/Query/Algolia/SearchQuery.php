@@ -85,9 +85,10 @@ class SearchQuery
     /**
      * Set a date restriction.
      *
-     * @param string    $dateFieldName
-     * @param string    $operation
+     * @param string $dateFieldName
+     * @param string $operation
      * @param \DateTime $date
+     * @return $this
      */
     public function withDateRestriction($dateFieldName, $operation, \DateTime $date)
     {
@@ -101,6 +102,7 @@ class SearchQuery
      *
      * @param string $name
      * @param string $value
+     * @return $this
      */
     public function withFacet($name, $value)
     {
@@ -124,9 +126,10 @@ class SearchQuery
     /**
      * Set a numeric filter.
      *
-     * @param string       $name
+     * @param string $name
      * @param string|array $values
-     * @param string       $logicalOperator
+     * @param string $logicalOperator
+     * @return $this
      */
     public function withNumericFilter($name, $values, $logicalOperator = 'and')
     {

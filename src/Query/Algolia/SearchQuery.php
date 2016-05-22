@@ -92,6 +92,8 @@ class SearchQuery
     public function withDateRestriction($dateFieldName, $operation, \DateTime $date)
     {
         $this->dateRestrictions[] = compact('dateFieldName', 'operation', 'date');
+
+        return $this;
     }
 
     /**
@@ -103,6 +105,8 @@ class SearchQuery
     public function withFacet($name, $value)
     {
         $this->facets[] = $name.':'.$value;
+
+        return $this;
     }
 
     /**
@@ -141,6 +145,8 @@ class SearchQuery
         }
 
         $this->numericFilters[] = $numericalFilter;
+
+        return $this;
     }
 
     /**

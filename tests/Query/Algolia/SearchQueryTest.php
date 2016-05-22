@@ -130,7 +130,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
     public function it_can_handle_numeric_filters()
     {
         $name = 'myFilter';
-        $myValues = [1,2,3];
+        $myValues = [1, 2, 3];
         $logicalOperator = SearchQuery::LOGICAL_OPERATOR_OR;
 
         $this->query->withNumericFilter($name, $myValues, $logicalOperator);
@@ -148,7 +148,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
     public function it_can_handle_numeric_filters_with_an_and_relation()
     {
         $name = 'myFilter';
-        $myValues = [1,2,3];
+        $myValues = [1, 2, 3];
         $logicalOperator = SearchQuery::LOGICAL_OPERATOR_AND;
 
         $this->query->withNumericFilter($name, $myValues, $logicalOperator);
@@ -198,7 +198,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $facetFilter = ['name', 'value'];
 
         $numericFilterName = 'myFilter';
-        $numericFilterValues = [1,2,3];
+        $numericFilterValues = [1, 2, 3];
         $logicalOperator = SearchQuery::LOGICAL_OPERATOR_OR;
 
         $dateFieldName = 'myDate';

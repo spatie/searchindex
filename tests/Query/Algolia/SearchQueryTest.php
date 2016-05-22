@@ -190,6 +190,33 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->expectedResult(['hitsPerPage' => $hitsPerPage]), $this->query->toArray());
     }
 
+    /**
+     * @test
+     */
+    public function it_allows_method_chaining_for_multiple_filters()
+    {
+        $facetFilter = ['name', 'value'];
+
+        $numericFilterName = 'myFilter';
+        $numericFilterValues = [1,2,3];
+        $logicalOperator = SearchQuery::LOGICAL_OPERATOR_OR;
+
+        $dateFieldName = 'myDate';
+        $operation = '>';
+        $date = new DateTime();
+
+        $this->query->withFacet('name', 'value')
+                    ->withDateRestriction($dateFieldName, $operation, $date)
+                    ->withNumericFilter($numericFilterName, $numericFilterValues, $logicalOperator);
+
+        $this->assertEquals($this->expectedResult(
+            [
+                'facetFilters' => ",{$facetFilter[0]}:{$facetFilter[1]}",
+                'numericFilters' => ",{$dateFieldName}{$operation}{$date->getTimestamp()},({$numericFilterName}={$numericFilterValues[0]},{$numericFilterName}={$numericFilterValues[1]},{$numericFilterName}={$numericFilterValues[2]})",
+            ]
+        ), $this->query->toArray());
+    }
+
     protected function expectedResult(array $expectedResult)
     {
         return array_merge($this->defaultResult, $expectedResult);

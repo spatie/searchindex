@@ -24,6 +24,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
             'numericFilters' => '',
             'facetFilters' => '',
             'hitsPerPage' => 10000,
+            'page' => 0,
         ];
     }
 
@@ -188,6 +189,20 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->query->setHitsPerPage($hitsPerPage);
 
         $this->assertEquals($this->expectedResult(['hitsPerPage' => $hitsPerPage]), $this->query->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_hits_page_to_be_set()
+    {
+        $hitsPerPage = 8;
+        $page = 2;
+
+        $this->query->setHitsPerPage($hitsPerPage);
+        $this->query->setPage($page);
+
+        $this->assertEquals($this->expectedResult(['hitsPerPage' => $hitsPerPage, 'page' => $page]), $this->query->toArray());
     }
 
     /**

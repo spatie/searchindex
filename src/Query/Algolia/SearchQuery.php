@@ -50,6 +50,11 @@ class SearchQuery
     protected $hitsPerPage = 10000;
 
     /**
+     * @var int
+     */
+    protected $page = 0;
+
+    /**
      * Set the query to search for.
      *
      * @param mixed $query
@@ -124,6 +129,18 @@ class SearchQuery
     }
 
     /**
+     * @param int $page
+     *
+     * @return SearchQuery
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
      * Set a numeric filter.
      *
      * @param string $name
@@ -188,6 +205,7 @@ class SearchQuery
             $query['facetFilters'] .= ','.$facet;
         }
 
+        $query['page'] = $this->page;
         $query['hitsPerPage'] = $this->hitsPerPage;
 
         return $query;

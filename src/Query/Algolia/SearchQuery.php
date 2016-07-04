@@ -59,7 +59,7 @@ class SearchQuery
      *
      * @param mixed $query
      *
-     * @return JobQuery
+     * @return SearchQuery
      */
     public function searchFor($query)
     {

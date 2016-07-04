@@ -104,7 +104,7 @@ class AlgoliaSpec extends ObjectBehavior
 
         $searchQuery->searchFor('my query');
 
-        $index->search('my query', ["numericFilters" => "", "facetFilters" => "", "hitsPerPage" => 10000])->shouldBeCalled();
+        $index->search('my query', ["numericFilters" => "", "facetFilters" => "", "hitsPerPage" => 10000, "page" => 0])->shouldBeCalled();
 
         $this->getResults($searchQuery);
     }

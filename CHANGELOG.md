@@ -2,6 +2,9 @@
 
 All notable changes to laravel-glide will be documented in this file.
 
+### 3.3.0 - 2016-07-04
+- Added `page` parameter
+
 ### 3.2.1 - 2015-05-22
 - Made some SearchQuery methods chainable
 

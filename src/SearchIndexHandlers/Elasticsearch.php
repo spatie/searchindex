@@ -58,6 +58,34 @@ class Elasticsearch implements SearchIndexHandler
     }
 
     /**
+     * Add multiple searchable subjects to the index.
+     *
+     * @param array|Collection $subjects
+     */
+    public function insertManyToIndex($subjects = [])
+    {
+        $params = [];
+
+        foreach ($subjects as $subject) {
+            if (! $subject instanceof Searchable) {
+                throw new \InvalidArgumentException;
+            }
+
+            $params['body'][] = [
+                "index" => [
+                    '_id' => $subject->getSearchableId(),
+                    '_index' => $this->indexName,
+                    '_type' => $subject->getSearchableType(),
+                ]
+            ];
+
+            $params['body'][] = $subject->getSearchableBody();
+        }
+
+        $this->elasticsearch->bulk($params);
+    }
+
+    /**
      * Remove the given subject from the search index.
      *
      * @param Searchable $subject

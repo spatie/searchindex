@@ -55,6 +55,21 @@ class AlgoliaSpec extends ObjectBehavior
         $this->upsertToIndex($searchableObject);
     }
 
+    public function it_adds_searchable_objects_to_the_search_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
+    {
+        $searchableObjects = [$searchableObject];
+        $objects = [];
+
+        $objects[] = array_merge(
+            $this->searchableBody,
+            ['objectID' => $this->searchableType.'-'.$this->searchableId]
+        );
+
+        $index->saveObjects($objects)->shouldBeCalled();
+
+        $this->upsertToIndex($searchableObjects);
+    }
+
     public function it_removes_a_searchable_object_from_the_index(\AlgoliaSearch\Index $index, Searchable $searchableObject)
     {
         $index->deleteObject($this->searchableType.'-'.$this->searchableId)->shouldBeCalled();

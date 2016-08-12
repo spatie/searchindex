@@ -41,48 +41,44 @@ class Elasticsearch implements SearchIndexHandler
     }
 
     /**
-     * Add or update the given searchable subject to the index.
+     * Add or update the given searchable subject or array of subjects or Traversable object containing subjects.
      *
-     * @param Searchable $subject
+     * @param Searchable|array|Traversable $subject
      */
-    public function upsertToIndex(Searchable $subject)
+    public function upsertToIndex($subject)
     {
-        $this->elasticsearch->index(
-            [
-                'index' => $this->indexName,
-                'type' => $subject->getSearchableType(),
-                'id' => $subject->getSearchableId(),
-                'body' => $subject->getSearchableBody(),
-            ]
-        );
-    }
+        if ($subject instanceof Searchable) {
+            $this->elasticsearch->index(
+                [
+                    'index' => $this->indexName,
+                    'type' => $subject->getSearchableType(),
+                    'id' => $subject->getSearchableId(),
+                    'body' => $subject->getSearchableBody(),
+                ]
+            );
+        } elseif (is_array($subject) || $subject instanceof \Traversable) {
+            $params = [];
 
-    /**
-     * Add multiple searchable subjects to the index.
-     *
-     * @param array|Collection $subjects
-     */
-    public function insertManyToIndex($subjects = [])
-    {
-        $params = [];
+            foreach ($subject as $item) {
+                if (! $item instanceof Searchable) {
+                    throw new \InvalidArgumentException;
+                }
 
-        foreach ($subjects as $subject) {
-            if (! $subject instanceof Searchable) {
-                throw new \InvalidArgumentException;
+                $params['body'][] = [
+                    "index" => [
+                        '_id' => $item->getSearchableId(),
+                        '_index' => $this->indexName,
+                        '_type' => $item->getSearchableType(),
+                    ]
+                ];
+
+                $params['body'][] = $item->getSearchableBody();
             }
 
-            $params['body'][] = [
-                "index" => [
-                    '_id' => $subject->getSearchableId(),
-                    '_index' => $this->indexName,
-                    '_type' => $subject->getSearchableType(),
-                ]
-            ];
-
-            $params['body'][] = $subject->getSearchableBody();
+            $this->elasticsearch->bulk($params);
+        } else {
+            throw new \InvalidArgumentException('Subject must be a searchable or array of searchables');
         }
-
-        $this->elasticsearch->bulk($params);
     }
 
     /**

@@ -72,7 +72,7 @@ class ElasticsearchSpec extends ObjectBehavior
 
         $elasticsearch->bulk($params)->shouldBeCalled();
 
-        $this->insertManyToIndex($searchableObjects);
+        $this->upsertToIndex($searchableObjects);
     }
 
     public function it_removes_a_searchable_object_from_the_index(Client $elasticsearch, Searchable $searchableObject)

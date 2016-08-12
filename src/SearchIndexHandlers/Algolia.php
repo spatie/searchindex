@@ -40,18 +40,37 @@ class Algolia implements SearchIndexHandler
     }
 
     /**
-     * Add or update the given searchable subject to the index.
+     * Add or update the given searchable subject or array of subjects or Traversable object containing subjects.
      *
-     * @param Searchable $subject
+     * @param Searchable|array|Traversable $subject
      */
-    public function upsertToIndex(Searchable $subject)
+    public function upsertToIndex($subject)
     {
-        $this->index->saveObject(
-            array_merge(
-                $subject->getSearchableBody(),
-                ['objectID' => $this->getAlgoliaId($subject)]
-            )
-        );
+        if ($subject instanceof Searchable) {
+            $this->index->saveObject(
+                array_merge(
+                    $subject->getSearchableBody(),
+                    ['objectID' => $this->getAlgoliaId($subject)]
+                )
+            );
+        } elseif (is_array($subject) || $subject instanceof \Traversable) {
+            $objects = [];
+
+            foreach ($subject as $item) {
+                if (! $item instanceof Searchable) {
+                    throw new \InvalidArgumentException;
+                }
+
+                $objects[] = array_merge(
+                    $item->getSearchableBody(),
+                    ['objectID' => $this->getAlgoliaId($item)]
+                );
+            }
+
+            $this->index->saveObjects($objects);
+        } else {
+            throw new \InvalidArgumentException('Subject must be a searchable or array of searchables');
+        }
     }
 
     /**

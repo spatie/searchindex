@@ -9,49 +9,31 @@ class SearchQuery
 
     protected $query = '';
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $useLocationAwareSearch = false;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $lat;
 
-    /**
-     * @var int
-     */
+    /**  @var int */
     protected $lng;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $aroundRadius;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $dateRestrictions = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $numericFilters = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $facets = [];
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $hitsPerPage = 10000;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $page = 0;
 
     /**

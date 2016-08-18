@@ -3,19 +3,17 @@
 namespace Spatie\SearchIndex\SearchIndexHandlers;
 
 use Elasticsearch\Client;
+use InvalidArgumentException;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandler;
+use Traversable;
 
 class Elasticsearch implements SearchIndexHandler
 {
-    /**
-     * @var Elasticsearch
-     */
+    /** @var Elasticsearch */
     protected $elasticsearch;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $indexName;
 
     /**
@@ -48,37 +46,42 @@ class Elasticsearch implements SearchIndexHandler
     public function upsertToIndex($subject)
     {
         if ($subject instanceof Searchable) {
-            $this->elasticsearch->index(
-                [
-                    'index' => $this->indexName,
-                    'type' => $subject->getSearchableType(),
-                    'id' => $subject->getSearchableId(),
-                    'body' => $subject->getSearchableBody(),
-                ]
-            );
-        } elseif (is_array($subject) || $subject instanceof \Traversable) {
-            $params = [];
-
-            foreach ($subject as $item) {
-                if (! $item instanceof Searchable) {
-                    throw new \InvalidArgumentException;
-                }
-
-                $params['body'][] = [
-                    "index" => [
-                        '_id' => $item->getSearchableId(),
-                        '_index' => $this->indexName,
-                        '_type' => $item->getSearchableType(),
-                    ]
-                ];
-
-                $params['body'][] = $item->getSearchableBody();
-            }
-
-            $this->elasticsearch->bulk($params);
-        } else {
-            throw new \InvalidArgumentException('Subject must be a searchable or array of searchables');
+            $subject = [$subject];
         }
+
+        if (is_array($subject) || $subject instanceof Traversable) {
+
+
+            $searchableItems = collect($subject)
+                ->each(function ($item) {
+                    if (!$item instanceof Searchable) {
+                        throw new InvalidArgumentException;
+                    }
+                })
+                ->flatMap(function ($item) {
+                    return
+                        [
+                            [
+                                "index" => [
+                                    '_id' => $item->getSearchableId(),
+                                    '_index' => $this->indexName,
+                                    '_type' => $item->getSearchableType(),
+                                ],
+                            ],
+
+                            $item->getSearchableBody()
+                        ];
+                })
+                ->toArray();
+
+            $payload['body'] = $searchableItems;
+
+            $this->elasticsearch->bulk($payload);
+
+            return;
+        }
+
+        throw new InvalidArgumentException('Subject must be a searchable or array of searchables');
     }
 
     /**
@@ -86,7 +89,8 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @param Searchable $subject
      */
-    public function removeFromIndex(Searchable $subject)
+    public
+    function removeFromIndex(Searchable $subject)
     {
         $this->elasticsearch->delete(
             [
@@ -101,9 +105,10 @@ class Elasticsearch implements SearchIndexHandler
      * Remove an item from the search index by type and id.
      *
      * @param string $type
-     * @param int    $id
+     * @param int $id
      */
-    public function removeFromIndexByTypeAndId($type, $id)
+    public
+    function removeFromIndexByTypeAndId($type, $id)
     {
         $this->elasticsearch->delete(
             [
@@ -119,7 +124,8 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return mixed
      */
-    public function clearIndex()
+    public
+    function clearIndex()
     {
         $this->elasticsearch->indices()->delete(['index' => $this->indexName]);
     }
@@ -131,7 +137,8 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return mixed
      */
-    public function getResults($query)
+    public
+    function getResults($query)
     {
         return $this->elasticsearch->search($query);
     }
@@ -141,7 +148,8 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return Elasticsearch
      */
-    public function getClient()
+    public
+    function getClient()
     {
         return $this->elasticsearch;
     }

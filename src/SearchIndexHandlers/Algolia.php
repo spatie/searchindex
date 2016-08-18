@@ -4,20 +4,18 @@ namespace Spatie\SearchIndex\SearchIndexHandlers;
 
 use AlgoliaSearch\Client;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use Spatie\SearchIndex\Query\Algolia\SearchQuery;
 use Spatie\SearchIndex\Searchable;
 use Spatie\SearchIndex\SearchIndexHandler;
+use Traversable;
 
 class Algolia implements SearchIndexHandler
 {
-    /**
-     * @var \AlgoliaSearch\Client
-     */
+    /** @var \AlgoliaSearch\Client */
     protected $algolia;
 
-    /**
-     * @var \AlgoliaSearch\Index
-     */
+    /** @var \AlgoliaSearch\Index */
     public $index;
 
     public function __construct(Client $algolia)
@@ -47,30 +45,32 @@ class Algolia implements SearchIndexHandler
     public function upsertToIndex($subject)
     {
         if ($subject instanceof Searchable) {
-            $this->index->saveObject(
-                array_merge(
-                    $subject->getSearchableBody(),
-                    ['objectID' => $this->getAlgoliaId($subject)]
-                )
-            );
-        } elseif (is_array($subject) || $subject instanceof \Traversable) {
-            $objects = [];
 
-            foreach ($subject as $item) {
-                if (! $item instanceof Searchable) {
-                    throw new \InvalidArgumentException;
-                }
-
-                $objects[] = array_merge(
-                    $item->getSearchableBody(),
-                    ['objectID' => $this->getAlgoliaId($item)]
-                );
-            }
-
-            $this->index->saveObjects($objects);
-        } else {
-            throw new \InvalidArgumentException('Subject must be a searchable or array of searchables');
+            $subject = [$subject];
         }
+
+        if (is_array($subject) || $subject instanceof Traversable) {
+            $searchIndexPayload = collect($subject)
+                ->each(function ($item) {
+                    if (!$item instanceof Searchable) {
+                        throw new InvalidArgumentException;
+                    }
+                })
+                ->map(function ($item) {
+                    return array_merge(
+                        $item->getSearchableBody(),
+                        ['objectID' => $this->getAlgoliaId($item)]
+                    );
+                })
+                ->toArray();
+
+            $this->index->saveObjects($searchIndexPayload);
+
+            return;
+        }
+
+        throw new InvalidArgumentException('Subject must be a searchable or array of searchables');
+
     }
 
     /**
@@ -87,11 +87,11 @@ class Algolia implements SearchIndexHandler
      * Remove an item from the search index by type and id.
      *
      * @param string $type
-     * @param int    $id
+     * @param int $id
      */
     public function removeFromIndexByTypeAndId($type, $id)
     {
-        $this->index->deleteObject($type.'-'.$id);
+        $this->index->deleteObject($type . '-' . $id);
     }
 
     /**
@@ -139,7 +139,7 @@ class Algolia implements SearchIndexHandler
      */
     protected function getAlgoliaId($subject)
     {
-        return $subject->getSearchableType().'-'.$subject->getSearchableId();
+        return $subject->getSearchableType() . '-' . $subject->getSearchableId();
     }
 
     /**

@@ -2,6 +2,9 @@
 
 All notable changes to laravel-glide will be documented in this file.
 
+### 3.4.0 - 2016-08-18
+- multiple searchable subjects can be added to the index in one go
+
 ### 3.3.0 - 2016-07-04
 - Added `page` parameter
 

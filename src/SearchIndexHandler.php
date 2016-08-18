@@ -14,11 +14,11 @@ interface SearchIndexHandler
     public function getResults($query);
 
     /**
-     * Add or update the given searchable subject to the index.
+     * Add or update the given searchable subject or array of subjects or Traversable object containing subjects.
      *
-     * @param Searchable $subject
+     * @param Searchable|array|Traversable $subject
      */
-    public function upsertToIndex(Searchable $subject);
+    public function upsertToIndex($subject);
 
     /**
      * Remove the given subject from the search index.

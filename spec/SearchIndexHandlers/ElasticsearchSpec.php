@@ -55,6 +55,26 @@ class ElasticsearchSpec extends ObjectBehavior
         $this->upsertToIndex($searchableObject);
     }
 
+    public function it_adds_searchable_objects_to_the_search_index(Client $elasticsearch, Searchable $searchableObject)
+    {
+        $searchableObjects = [$searchableObject];
+        $params = [];
+
+        $params['body'][] = [
+            "index" => [
+                '_id' => $this->searchableId,
+                '_index' => $this->indexName,
+                '_type' => $this->searchableType,
+            ]
+        ];
+
+        $params['body'][] = $this->searchableBody;
+
+        $elasticsearch->bulk($params)->shouldBeCalled();
+
+        $this->upsertToIndex($searchableObjects);
+    }
+
     public function it_removes_a_searchable_object_from_the_index(Client $elasticsearch, Searchable $searchableObject)
     {
         $elasticsearch->delete(

@@ -22,9 +22,9 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
         $this->query = new SearchQuery();
         $this->defaultResult = [
             'numericFilters' => '',
-            'facetFilters' => '',
-            'hitsPerPage' => 10000,
-            'page' => 0,
+            'facetFilters'   => '',
+            'hitsPerPage'    => 10000,
+            'page'           => 0,
         ];
     }
 
@@ -226,7 +226,7 @@ class SearchQueryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($this->expectedResult(
             [
-                'facetFilters' => ",{$facetFilter[0]}:{$facetFilter[1]}",
+                'facetFilters'   => ",{$facetFilter[0]}:{$facetFilter[1]}",
                 'numericFilters' => ",{$dateFieldName}{$operation}{$date->getTimestamp()},({$numericFilterName}={$numericFilterValues[0]},{$numericFilterName}={$numericFilterValues[1]},{$numericFilterName}={$numericFilterValues[2]})",
             ]
         ), $this->query->toArray());

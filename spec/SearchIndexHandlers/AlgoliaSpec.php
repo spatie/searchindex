@@ -103,7 +103,7 @@ class AlgoliaSpec extends ObjectBehavior
     public function it_can_get_search_results_using_an_array(\AlgoliaSearch\Index $index)
     {
         $query = [
-            'query' => 'raw query',
+            'query'  => 'raw query',
             'param1' => 'yes',
             'param2' => 'no',
         ];
@@ -119,7 +119,7 @@ class AlgoliaSpec extends ObjectBehavior
 
         $searchQuery->searchFor('my query');
 
-        $index->search('my query', ["numericFilters" => "", "facetFilters" => "", "hitsPerPage" => 10000, "page" => 0])->shouldBeCalled();
+        $index->search('my query', ['numericFilters' => '', 'facetFilters' => '', 'hitsPerPage' => 10000, 'page' => 0])->shouldBeCalled();
 
         $this->getResults($searchQuery);
     }

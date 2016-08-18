@@ -46,11 +46,11 @@ class ElasticsearchSpec extends ObjectBehavior
         $params = [];
 
         $params['body'][] = [
-            "index" => [
-                '_id' => $this->searchableId,
+            'index' => [
+                '_id'    => $this->searchableId,
                 '_index' => $this->indexName,
-                '_type' => $this->searchableType,
-            ]
+                '_type'  => $this->searchableType,
+            ],
         ];
 
         $params['body'][] = $this->searchableBody;
@@ -66,11 +66,11 @@ class ElasticsearchSpec extends ObjectBehavior
         $params = [];
 
         $params['body'][] = [
-            "index" => [
-                '_id' => $this->searchableId,
+            'index' => [
+                '_id'    => $this->searchableId,
                 '_index' => $this->indexName,
-                '_type' => $this->searchableType,
-            ]
+                '_type'  => $this->searchableType,
+            ],
         ];
 
         $params['body'][] = $this->searchableBody;
@@ -85,8 +85,8 @@ class ElasticsearchSpec extends ObjectBehavior
         $elasticsearch->delete(
             [
                 'index' => $this->indexName,
-                'type' => $this->searchableType,
-                'id' => $this->searchableId,
+                'type'  => $this->searchableType,
+                'id'    => $this->searchableId,
             ]
         )->shouldBeCalled();
 
@@ -98,8 +98,8 @@ class ElasticsearchSpec extends ObjectBehavior
         $elasticsearch->delete(
             [
                 'index' => $this->indexName,
-                'type' => $this->searchableType,
-                'id' => $this->searchableId,
+                'type'  => $this->searchableType,
+                'id'    => $this->searchableId,
             ]
         )->shouldBeCalled();
 

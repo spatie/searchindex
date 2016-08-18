@@ -50,26 +50,24 @@ class Elasticsearch implements SearchIndexHandler
         }
 
         if (is_array($subject) || $subject instanceof Traversable) {
-
-
             $searchableItems = collect($subject)
                 ->each(function ($item) {
                     if (!$item instanceof Searchable) {
-                        throw new InvalidArgumentException;
+                        throw new InvalidArgumentException();
                     }
                 })
                 ->flatMap(function ($item) {
                     return
                         [
                             [
-                                "index" => [
-                                    '_id' => $item->getSearchableId(),
+                                'index' => [
+                                    '_id'    => $item->getSearchableId(),
                                     '_index' => $this->indexName,
-                                    '_type' => $item->getSearchableType(),
+                                    '_type'  => $item->getSearchableType(),
                                 ],
                             ],
 
-                            $item->getSearchableBody()
+                            $item->getSearchableBody(),
                         ];
                 })
                 ->toArray();
@@ -89,14 +87,13 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @param Searchable $subject
      */
-    public
-    function removeFromIndex(Searchable $subject)
+    public function removeFromIndex(Searchable $subject)
     {
         $this->elasticsearch->delete(
             [
                 'index' => $this->indexName,
-                'type' => $subject->getSearchableType(),
-                'id' => $subject->getSearchableId(),
+                'type'  => $subject->getSearchableType(),
+                'id'    => $subject->getSearchableId(),
             ]
         );
     }
@@ -105,16 +102,15 @@ class Elasticsearch implements SearchIndexHandler
      * Remove an item from the search index by type and id.
      *
      * @param string $type
-     * @param int $id
+     * @param int    $id
      */
-    public
-    function removeFromIndexByTypeAndId($type, $id)
+    public function removeFromIndexByTypeAndId($type, $id)
     {
         $this->elasticsearch->delete(
             [
                 'index' => $this->indexName,
-                'type' => $type,
-                'id' => $id,
+                'type'  => $type,
+                'id'    => $id,
             ]
         );
     }
@@ -124,8 +120,7 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return mixed
      */
-    public
-    function clearIndex()
+    public function clearIndex()
     {
         $this->elasticsearch->indices()->delete(['index' => $this->indexName]);
     }
@@ -137,8 +132,7 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return mixed
      */
-    public
-    function getResults($query)
+    public function getResults($query)
     {
         return $this->elasticsearch->search($query);
     }
@@ -148,8 +142,7 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return Elasticsearch
      */
-    public
-    function getClient()
+    public function getClient()
     {
         return $this->elasticsearch;
     }

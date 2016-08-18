@@ -40,8 +40,8 @@ class SearchIndexServiceProvider extends ServiceProvider
 
                     $elasticSearchClient = new ElasticsearchClient(
                         [
-                            'hosts' => $config['hosts'],
-                            'logPath' => $config['logPath'],
+                            'hosts'    => $config['hosts'],
+                            'logPath'  => $config['logPath'],
                             'logLevel' => $config['logLevel'],
                         ]
                     );
@@ -73,7 +73,6 @@ class SearchIndexServiceProvider extends ServiceProvider
             }
 
             throw new Exception($app['config']->get('searchindex.engine').' is not a valid search engine');
-
         });
     }
 
@@ -84,6 +83,6 @@ class SearchIndexServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array('searchindex');
+        return ['searchindex'];
     }
 }

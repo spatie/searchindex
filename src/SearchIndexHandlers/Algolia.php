@@ -45,7 +45,6 @@ class Algolia implements SearchIndexHandler
     public function upsertToIndex($subject)
     {
         if ($subject instanceof Searchable) {
-
             $subject = [$subject];
         }
 
@@ -53,7 +52,7 @@ class Algolia implements SearchIndexHandler
             $searchIndexPayload = collect($subject)
                 ->each(function ($item) {
                     if (!$item instanceof Searchable) {
-                        throw new InvalidArgumentException;
+                        throw new InvalidArgumentException();
                     }
                 })
                 ->map(function ($item) {
@@ -70,7 +69,6 @@ class Algolia implements SearchIndexHandler
         }
 
         throw new InvalidArgumentException('Subject must be a searchable or array of searchables');
-
     }
 
     /**
@@ -87,11 +85,11 @@ class Algolia implements SearchIndexHandler
      * Remove an item from the search index by type and id.
      *
      * @param string $type
-     * @param int $id
+     * @param int    $id
      */
     public function removeFromIndexByTypeAndId($type, $id)
     {
-        $this->index->deleteObject($type . '-' . $id);
+        $this->index->deleteObject($type.'-'.$id);
     }
 
     /**
@@ -139,7 +137,7 @@ class Algolia implements SearchIndexHandler
      */
     protected function getAlgoliaId($subject)
     {
-        return $subject->getSearchableType() . '-' . $subject->getSearchableId();
+        return $subject->getSearchableType().'-'.$subject->getSearchableId();
     }
 
     /**

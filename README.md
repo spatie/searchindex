@@ -5,6 +5,7 @@ Store and retrieve objects from a search index
 [![Build status](https://img.shields.io/travis/spatie/searchindex.svg?style=flat-square)](https://travis-ci.org/spatie/searchindex)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/47cca532-7a48-4f62-ac66-77f9a0ef122e.svg)](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/searchindex.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/searchindex)
+[![StyleCI](https://styleci.io/repos/29306962/shield)](https://styleci.io/repos/29306962)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/searchindex.svg?style=flat-square)](https://packagist.org/packages/spatie/searchindex)
 
 This is an opinionated Laravel 5.1 package to store and retrieve objects from a search index.

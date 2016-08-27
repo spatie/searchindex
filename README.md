@@ -1,5 +1,10 @@
 Store and retrieve objects from a search index
 =================
+
+## EOL-warning
+
+This package has been abandoned on 2016-08-27. Please use [Laravel Scout](https://github.com/laravel/scout) instead.
+
 [![Latest Version](https://img.shields.io/github/release/spatie/searchindex.svg?style=flat-square)](https://github.com/spatie/searchindex/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build status](https://img.shields.io/travis/spatie/searchindex.svg?style=flat-square)](https://travis-ci.org/spatie/searchindex)

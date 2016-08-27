@@ -1,6 +1,7 @@
 {
     "name": "spatie/searchindex",
     "homepage": "https://github.com/spatie/searchindex",
+    "abandoned" : "This package has been abandoned. Please use laravel/scout instead.",
     "description": "Store and retrieve objects from Elasticsearch or Algolia",
     "keywords":
     [

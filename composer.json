@@ -31,6 +31,16 @@
             "Spatie\\SearchIndex\\": "src/"
         }
     },
+    "extra":{
+        "laravel":{
+            "providers":[
+                "Spatie\\SearchIndex\\SearchIndexServiceProvider"
+            ],
+            "aliases":{
+                "SearchIndex": "Spatie\\SearchIndex\\SearchIndexFacade"
+            }
+        }
+    },
     "autoload-dev": {
         "psr-4": {
             "Spatie\\SearchIndex\\Test\\": "tests"

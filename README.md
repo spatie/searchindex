@@ -69,7 +69,7 @@ be self-explanatory.
 
 The next installation steps depend on if you want to use Elasticsearch or Algolia.
 
-###Elasticsearch
+### Elasticsearch
 To use Elasticsearch you must install the official 1.x series low level client:
 ```bash
 composer require elasticsearch/elasticsearch "^1.3"
@@ -81,7 +81,7 @@ use [these instructions](https://github.com/fideloper/Vaprobash/blob/master/scri
 from the excellent [Vaprobash repo](https://github.com/fideloper/Vaprobash).
 
 
-###Algolia
+### Algolia
 To use Algolia you must install the official low level client:
 ```bash
 composer require algolia/algoliasearch-client-php
@@ -89,7 +89,7 @@ composer require algolia/algoliasearch-client-php
 
 ## Usage
 
-###Prepare your object
+### Prepare your object
 
 Objects that you want to store in the index should implement the
 provided ```Spatie\SearchIndex\Searchable```- interface.
@@ -171,7 +171,7 @@ class Product extends Eloquent implements Searchable
 The searchindex will use the returned searchableType and searchableId to
 identify an object in the index.
 
-###Add an object to the index
+### Add an object to the index
 If you are using the facade it couldn't be simpler.
 ```php
 //$product is an object that implements the Searchable interface
@@ -179,7 +179,7 @@ If you are using the facade it couldn't be simpler.
 SearchIndex::upsertToIndex($product);
 ```
 
-###Update an object in the index
+### Update an object in the index
 You probably would have guessed it.
 
 ```php
@@ -187,7 +187,7 @@ You probably would have guessed it.
 
 SearchIndex::upsertToIndex($product);
 ```
-###Remove an object from the index
+### Remove an object from the index
 Yep. Easy.
 
 ```php
@@ -203,20 +203,20 @@ SearchIndex::removeFromIndexByTypeAndId('product', 1);
 ```
 This can be handy when you've already deleted your model.
 
-###Clear the entire index
+### Clear the entire index
 If only you could to this with your facebook account.
 
 ```php
 SearchIndex::clearIndex();
 ```
 
-###Perform a search on the index
+### Perform a search on the index
 You can retrieve search results with this method:
 ```php
 SearchIndex::getResults($query);
 ```
 
-####Elasticsearch
+#### Elasticsearch
 ```$query``` should be an array that adheres to the scheme provided
 by [the elasticsearch documentation](http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_search_operations.html).
 
@@ -247,7 +247,7 @@ The search results that come back are simply elasticsearch response elements
 serialized into an array. You can see [an example of a response](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-body.html)
 in the official elasticsearch documentation.
 
-####Algolia
+#### Algolia
 You can just pass a string to search the index:
 ```php
 SearchIndex::getResults('look for this');
@@ -257,13 +257,13 @@ the [official documentation](https://github.com/algolia/algoliasearch-client-php
 
 
 
-###All other operations
+### All other operations
 For all other operations you can get the underlying client:
 ```php
 SearchIndex::getClient(); // will return the Elasticsearch or Algolia client.
 ```
 
-##Query helpers
+## Query helpers
 
 If you're using Algolia you can use a `SearchQuery`-object to perform searches.
 
@@ -278,7 +278,7 @@ $searchQuery->searchFor('my query')
 SearchIndex::getResults($searchQuery);
 ```
 
-##Tests
+## Tests
 This package comes with a set of unit tests. Every time the package
 gets updated [Travis CI](https://travis-ci.org) will automatically run them.
 
@@ -297,6 +297,6 @@ If you discover any security related issues, please email [freek@spatie.be](mail
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
-##About Spatie
+## About Spatie
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all
 our open source projects [on our website](https://spatie.be/opensource).

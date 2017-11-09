@@ -3,9 +3,10 @@
 namespace Spatie\SearchIndex\Test\Query\Algolia;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Spatie\SearchIndex\Query\Algolia\SearchQuery;
 
-class SearchQueryTest extends \PHPUnit_Framework_TestCase
+class SearchQueryTest extends TestCase
 {
     /**
      * @var SearchQuery

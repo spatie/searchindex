@@ -43,8 +43,10 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @param Searchable|array|Traversable $subject
      */
-    public function upsertToIndex($subject)
+    public function upsertToIndex($subject, $indexName = null)
     {
+        $indexName = $this->resolveIndexName($indexName);
+
         if ($subject instanceof Searchable) {
             $subject = [$subject];
         }
@@ -56,13 +58,13 @@ class Elasticsearch implements SearchIndexHandler
                         throw new InvalidArgumentException();
                     }
                 })
-                ->flatMap(function ($item) {
+                ->flatMap(function ($item) use($indexName) {
                     return
                         [
                             [
                                 'index' => [
                                     '_id'    => $item->getSearchableId(),
-                                    '_index' => $this->indexName,
+                                    '_index' => $indexName,
                                     '_type'  => $item->getSearchableType(),
                                 ],
                             ],
@@ -87,11 +89,13 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @param Searchable $subject
      */
-    public function removeFromIndex(Searchable $subject)
+    public function removeFromIndex(Searchable $subject, $indexName = null)
     {
+        $indexName = $this->resolveIndexName($indexName);
+
         $this->elasticsearch->delete(
             [
-                'index' => $this->indexName,
+                'index' => $indexName,
                 'type'  => $subject->getSearchableType(),
                 'id'    => $subject->getSearchableId(),
             ]
@@ -104,11 +108,13 @@ class Elasticsearch implements SearchIndexHandler
      * @param string $type
      * @param int    $id
      */
-    public function removeFromIndexByTypeAndId($type, $id)
+    public function removeFromIndexByTypeAndId($type, $id, $indexName = null)
     {
+        $indexName = $this->resolveIndexName($indexName);
+
         $this->elasticsearch->delete(
             [
-                'index' => $this->indexName,
+                'index' => $indexName,
                 'type'  => $type,
                 'id'    => $id,
             ]
@@ -120,9 +126,11 @@ class Elasticsearch implements SearchIndexHandler
      *
      * @return mixed
      */
-    public function clearIndex()
+    public function clearIndex($indexName = null)
     {
-        $this->elasticsearch->indices()->delete(['index' => $this->indexName]);
+        $indexName = $this->resolveIndexName($indexName);
+
+        $this->elasticsearch->indices()->delete(['index' => $indexName]);
     }
 
     /**
@@ -145,5 +153,14 @@ class Elasticsearch implements SearchIndexHandler
     public function getClient()
     {
         return $this->elasticsearch;
+    }
+
+    protected function resolveIndexName($indexName = null)
+    {
+        if (!$indexName) {
+            $indexName = $this->indexName;
+        }
+
+        return $indexName;
     }
 }

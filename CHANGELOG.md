@@ -2,6 +2,9 @@
 
 All notable changes to laravel-glide will be documented in this file.
 
+### 3.5.0 - 2017-12-18
+- add optional index name to use when performing Elasticsearch operations
+
 ### 3.4.0 - 2016-08-18
 - multiple searchable subjects can be added to the index in one go
 

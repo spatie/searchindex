@@ -5,6 +5,7 @@ namespace spec\Spatie\SearchIndex\SearchIndexHandlers;
 use Elasticsearch\Client;
 use PhpSpec\ObjectBehavior;
 use Spatie\SearchIndex\Searchable;
+use Elasticsearch\Namespaces\IndicesNamespace;
 
 class ElasticsearchSpec extends ObjectBehavior
 {
@@ -106,17 +107,13 @@ class ElasticsearchSpec extends ObjectBehavior
         $this->removeFromIndexByTypeAndId($this->searchableType, $this->searchableId);
     }
 
-    /*
-     * Need to figure how to test the clearIndex function
-     *
-        function it_can_clear_the_index(Client $elasticsearch)
-        {
+    public function it_can_clear_the_index(Client $elasticsearch, IndicesNamespace $indices)
+    {
+        $elasticsearch->indices()->willReturn($indices);
+        $indices->delete(['index' => $this->indexName])->shouldBeCalled();
 
-            $elasticsearch->indices()->delete(['index' => $this->indexName]);
-
-            $this->clearIndex();
-        }
-    */
+        $this->clearIndex();
+    }
 
     public function it_can_get_search_results(Client $elasticsearch)
     {

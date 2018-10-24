@@ -4,7 +4,6 @@ Store and retrieve objects from a search index
 [![Latest Version](https://img.shields.io/github/release/spatie/searchindex.svg?style=flat-square)](https://github.com/spatie/searchindex/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build status](https://img.shields.io/travis/spatie/searchindex.svg?style=flat-square)](https://travis-ci.org/spatie/searchindex)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/47cca532-7a48-4f62-ac66-77f9a0ef122e.svg)](https://insight.sensiolabs.com/projects/47cca532-7a48-4f62-ac66-77f9a0ef122e)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/searchindex.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/searchindex)
 [![StyleCI](https://styleci.io/repos/29306962/shield)](https://styleci.io/repos/29306962)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/searchindex.svg?style=flat-square)](https://packagist.org/packages/spatie/searchindex)

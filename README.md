@@ -22,6 +22,16 @@ SearchIndex::getResults('look for this');
 Spatie is a webdesign agency in Antwerp, Belgium. You'll find an overview of all our
 open source projects [on our website](https://spatie.be/opensource).
 
+## Support us
+
+Learn how to create a package like this one, by watching our premium video course:
+
+[![Laravel Package training](https://spatie.be/github/package-training.jpg)](https://laravelpackage.training)
+
+We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+
+We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+
 ## Postcardware
 
 You're free to use this package (it's [MIT-licensed](LICENSE.md)), but if it makes it to your production environment you are required to send us a postcard from your hometown, mentioning which of our package(s) you are using.
@@ -78,7 +88,6 @@ You also should have a server with Elasticsearch installed.
 If you want to install it on your local development machine you can
 use [these instructions](https://github.com/fideloper/Vaprobash/blob/master/scripts/elasticsearch.sh)
 from the excellent [Vaprobash repo](https://github.com/fideloper/Vaprobash).
-
 
 ### Algolia
 To use Algolia you must install the official low level client:
@@ -253,8 +262,6 @@ SearchIndex::getResults('look for this');
 ```
 To perform more advanced queries an array may be passed. Read
 the [official documentation](https://github.com/algolia/algoliasearch-client-php#search) to learn what's possible.
-
-
 
 ### All other operations
 For all other operations you can get the underlying client:
